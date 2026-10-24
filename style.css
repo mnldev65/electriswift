@@ -1,0 +1,269 @@
+:root {
+    --verde-escuro: #092D25;
+    --verde: #18A957;
+    --verde-claro: #4BE477;
+    --branco: #FFFFFF;
+    --fundo: #F5F7F5;
+    --texto: #24332D;
+    --texto-secundario: #52635A;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Rolagem suave ao navegar entre seções */
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: var(--fundo);
+    color: var(--texto);
+    line-height: 1.6;
+}
+
+.site-header {
+    background-color: var(--verde-escuro);
+    padding: 20px;
+}
+
+.brand {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--branco);
+    text-decoration: none;
+    flex-direction: column;
+    gap: 16px;
+    margin-top: 32px;
+}
+
+.logo {
+    width: 100px;
+    height: 100px;
+    object-fit: contain;
+}
+
+.nome {
+    font-size: 2.8rem;
+    font-weight: 800;
+    line-height: 1.2;
+    letter-spacing: -1px;
+    font-family: emoji;
+}
+
+.destaque {
+    color: var(--verde-claro);
+}
+
+.navBar {
+    display: none;
+}
+
+.navBar ul {
+    list-style: none;
+}
+
+.navBar a {
+    color: var(--branco);
+    text-decoration: none;
+}
+
+.hero {
+    background-color: var(--verde-escuro);
+    color: var(--branco);
+    text-align: center;
+    padding: 20px 22px 40px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 22px;
+}
+
+.hero h1 {
+    display: none;
+}
+
+.hero p {
+    max-width: 480px;
+    color: #D5E5DC;
+    font-size: 1rem;
+}
+
+.hero-imagem {
+    width: 50%;
+    max-width: 480px;
+    margin: 50px;
+}
+
+.hero-acoes {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    width: 100%;
+    max-width: 340px;
+    margin: 16px;
+}
+
+.btnComecar,
+.btnSaibaMais {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 100%;
+    min-height: 50px;
+    padding: 12px 20px;
+
+    border: 2px solid transparent;
+    border-radius: 30px;
+
+    font-size: 1rem;
+    font-weight: 700;
+    text-align: center;
+    text-decoration: none;
+
+    cursor: pointer;
+    transition:
+        background-color 0.2s ease,
+        color 0.2s ease,
+        transform 0.2s ease;
+}
+
+.btnComecar {
+    background-color: var(--verde-claro);
+    color: var(--verde-escuro);
+}
+
+.btnSaibaMais {
+    background-color: transparent;
+    border-color: var(--verde-claro);
+    color: var(--branco);
+}
+
+.btnComecar:hover {
+    background-color: var(--branco);
+}
+
+.btnSaibaMais:hover {
+    background-color: var(--verde-claro);
+    color: var(--verde-escuro);
+}
+
+.btnComecar:focus-visible,
+.btnSaibaMais:focus-visible,
+.brand:focus-visible,
+.navBar a:focus-visible {
+    outline: 3px solid var(--branco);
+    outline-offset: 4px;
+}
+
+.site-footer {
+    background-color: var(--verde-escuro);
+    color: var(--branco);
+    padding: 36px 22px 20px;
+}
+
+.footer-container {
+    width: 100%;
+    max-width: 1100px;
+    margin: 0 auto;
+
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 28px;
+}
+
+.footer-identidade {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.footer-logo {
+    width: 42px;
+    height: 42px;
+    object-fit: contain;
+    flex-shrink: 0;
+}
+
+.footer-nome {
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 1.65rem;
+    font-weight: 800;
+    line-height: 1.2;
+    letter-spacing: -0.5px;
+    color: var(--branco);
+}
+
+.footer-nome .destaque {
+    color: var(--verde-claro);
+}
+
+.footer-descricao {
+    max-width: 340px;
+    margin-top: 14px;
+
+    color: #D5E5DC;
+    font-size: 0.9rem;
+    line-height: 1.7;
+}
+
+.footer-projeto h2,
+.footer-aviso h2 {
+    margin-bottom: 10px;
+
+    color: var(--branco);
+    font-size: 1rem;
+    line-height: 1.4;
+}
+
+.footer-projeto p,
+.footer-aviso p {
+    color: #C5D9CD;
+    font-size: 0.875rem;
+    line-height: 1.8;
+}
+
+.footer-bottom {
+    width: 100%;
+    max-width: 1100px;
+    margin: 30px auto 0;
+    padding-top: 18px;
+
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
+
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 14px;
+}
+
+.footer-copyright {
+    color: #C5D9CD;
+    font-size: 0.8rem;
+    line-height: 1.6;
+}
+
+@media (min-width: 768px) {
+
+    .site-footer {
+        padding: 48px 32px 22px;
+    }
+
+    .footer-container {
+        grid-template-columns: 1.1fr 1fr 1.2fr;
+        gap: 40px;
+    }
+
+    .footer-bottom {
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+        gap: 24px;
+    }
+}
