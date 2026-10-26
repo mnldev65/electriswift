@@ -37,19 +37,19 @@ body {
     justify-content: center;
     color: var(--branco);
     text-decoration: none;
-    flex-direction: column;
+    flex-direction: row;
     gap: 16px;
     margin-top: 32px;
 }
 
 .logo {
-    width: 100px;
-    height: 100px;
+    width: 50px;
+    height: 50px;
     object-fit: contain;
 }
 
 .nome {
-    font-size: 2.8rem;
+    font-size: 2.5rem;
     font-weight: 800;
     line-height: 1.2;
     letter-spacing: -1px;
@@ -58,19 +58,6 @@ body {
 
 .destaque {
     color: var(--verde-claro);
-}
-
-.navBar {
-    display: none;
-}
-
-.navBar ul {
-    list-style: none;
-}
-
-.navBar a {
-    color: var(--branco);
-    text-decoration: none;
 }
 
 .hero {
@@ -84,21 +71,55 @@ body {
     gap: 22px;
 }
 
+.heroContainer {
+    width: 100%;
+    max-width: 1100px;
+    margin: 0 auto;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 24px;
+}
+
+.heroTexto {
+    width: 100%;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 22px;
+
+    text-align: center;
+}
+
 .hero h1 {
-    display: none;
+    display: block;
+    max-width: 24ch;
+
+    font-size: clamp(1.8rem, 7vw, 2.4rem);
+    line-height: 1.2;
+    letter-spacing: -0.5px;
 }
 
 .hero p {
+    width: 100%;
     max-width: 480px;
+
     color: #D5E5DC;
     font-size: 1rem;
 }
 
 .hero-imagem {
-    width: 50%;
-    max-width: 480px;
-    margin: 50px;
+    display: block;
+    width: 55%;
+    max-width: 240px;
+    height: auto;
+    object-fit: contain;
+
+    margin: 8px 0 18px;
 }
+
 
 .hero-acoes {
     display: flex;
@@ -250,6 +271,99 @@ body {
 }
 
 @media (min-width: 768px) {
+    .brand {
+        flex-direction: row;
+        margin-top: 0px;
+        justify-content: flex-start;
+        margin-left: 180px;
+    }
+
+    .nome {
+        font-size: 3rem;
+    }
+
+    .logo {
+        width: 60px;
+        height: 60px;
+    }
+
+    .hero {
+        background:
+            radial-gradient(ellipse at 78% 42%,
+                rgba(24, 169, 87, 0.28) 0%,
+                rgba(24, 169, 87, 0.08) 32%,
+                transparent 62%),
+            linear-gradient(135deg,
+                #092D25 0%,
+                #0B382B 55%,
+                #092D25 100%);
+
+        color: var(--branco);
+        overflow: hidden;
+    }
+
+
+    .heroContainer {
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+        padding: 32px 0;
+        gap: clamp(32px, 6vw, 90px);
+    }
+
+    .heroTexto {
+        flex: 1;
+        min-width: 0;
+
+        align-items: flex-start;
+        text-align: left;
+        gap: 30px;
+    }
+
+    .hero h1 {
+        display: block;
+        max-width: 20ch;
+
+        font-size: clamp(2rem, 4vw, 3rem);
+        line-height: 1.2;
+        text-align: left;
+    }
+
+    .hero p {
+        max-width: 480px;
+        font-size: 1rem;
+        text-align: left;
+    }
+
+    .hero-imagem {
+        flex: 0 0 auto;
+
+        width: clamp(220px, 28vw, 320px);
+        margin-top: 15px;
+        max-width: 250px;
+        height: auto;
+
+        margin: 0;
+    }
+
+    .hero-acoes {
+        flex-direction: row;
+        justify-content: flex-start;
+
+        width: 100%;
+        max-width: 440px;
+
+        gap: 45px;
+        margin: 16px 0 0;
+    }
+
+    .btnComecar,
+    .btnSaibaMais {
+        flex: 1;
+        width: auto;
+        min-width: 0;
+    }
+
 
     .site-footer {
         padding: 48px 32px 22px;
