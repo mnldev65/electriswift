@@ -1,0 +1,25 @@
+:root {
+  --color-primary: #0b3529;
+  --color-primary-dark: #062a21;
+  --color-accent: #39df79;
+  --color-accent-hover: #2bc96a;
+
+  --color-background: #f5f7f6;
+  --color-surface: #ffffff;
+  --color-text: #17231e;
+  --color-text-muted: #64716b;
+  --color-border: #dce5df;
+
+  --radius-sm: 8px;
+  --radius-md: 14px;
+  --radius-lg: 20px;
+
+  --spacing-1: 4px;
+  --spacing-2: 8px;
+  --spacing-3: 12px;
+  --spacing-4: 16px;
+  --spacing-6: 24px;
+  --spacing-8: 32px;
+
+  --content-max-width: 1440px;
+}
