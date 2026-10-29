@@ -1,0 +1,195 @@
+:root {
+  --primary-color: #0B3B24;
+  --accent-color: #10B981;
+  --bg-surface: #F8FAFC;
+  --card-bg: #FFFFFF;
+  --text-main: #0F172A;
+  --border-color: #E2E8F0;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: system-ui, -apple-system, sans-serif;
+  background-color: var(--bg-surface);
+  color: var(--text-main);
+}
+
+.app-header {
+  background-color: var(--primary-color);
+  color: #FFFFFF;
+  padding: 16px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: bold;
+  font-size: 1.1rem;
+}
+
+.logo {
+  width: 50px;
+  height: 50px;
+  object-fit: contain;
+}
+
+.nome {
+  font-size: 2.3rem;
+  font-weight: 800;
+  line-height: 1.2;
+  letter-spacing: -1px;
+  font-family: emoji;
+}
+
+.destaque {
+  color: var(--verde-claro);
+}
+
+.menu-toggle {
+  background: none;
+  border: none;
+  color: #FFFFFF;
+  font-size: 2.5rem;
+  cursor: pointer;
+}
+
+.simulator-container {
+  padding: 16px 16px 90px 16px; 
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.simulator-step {
+  padding: 16px;
+}
+
+.step-header {
+  margin-bottom: 20px;
+}
+
+.step-title {
+  font-size: 1.6rem;
+  color: var(--primary-color);
+  margin-bottom: 8px;
+}
+
+.step-counter {
+  font-size: 0.85rem;
+  color: var(--accent-color);
+  font-weight: 600;
+  text-transform: uppercase;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 8px;
+  margin-top: 5px;
+}
+
+.step-header h2 {
+  margin: 4px 0;
+  font-size: 1.4rem;
+  color: var(--primary-color);
+}
+
+.step-subtitle {
+  font-size: 0.95rem;
+  color: #64748B;
+  margin: 0 0 12px 0;
+
+}
+
+.appliances-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+}
+
+.appliance-card {
+  background-color: var(--card-bg);
+  border: 2px solid var(--border-color);
+  border-radius: 12px;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+}
+
+.appliance-card:active {
+  transform: scale(0.98);
+}
+
+.appliance-card.selected {
+  border-color: var(--accent-color);
+  background-color: #F0FDF4;
+}
+
+.appliance-icon {
+  font-size: 2rem;
+  margin-bottom: 8px;
+}
+
+.appliance-image {
+  width: 40px;
+  height: 40px;
+  object-fit: contain;
+  margin-bottom: 8px;
+}
+
+.appliance-name {
+  font-weight: 600;
+  font-size: 0.95rem;
+  color: var(--text-main);
+  margin-bottom: 4px;
+}
+
+.appliance-power {
+  font-size: 0.8rem;
+  color: #64748B;
+}
+
+.card-custom {
+  border-style: dashed;
+  background-color: transparent;
+}
+
+.sticky-footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: var(--card-bg);
+  padding: 16px;
+  box-shadow: 0 -4px 12px rgba(0, 0, 0, 0.05);
+  display: flex;
+  justify-content: center;
+}
+
+.btn-primary {
+  background-color: var(--accent-color);
+  color: #0F172A;
+  border: none;
+  width: 100%;
+  max-width: 480px;
+  padding: 14px;
+  border-radius: 8px;
+  font-weight: bold;
+  font-size: 1rem;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
+}
+
+.btn-primary:hover {
+  filter: brightness(0.95);
+}

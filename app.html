@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Entenda o consumo de energia da sua casa com o ElectriSwift.">
+    <link rel="stylesheet" href="css/tokens.css">
+    <link rel="stylesheet" href="./css/app.css">
+    <title>ElectriSwift | Home</title>
+</head>
+
+<body>
+    <header class="app-header">
+        <div class="logo-wrapper">
+            <img src="./assets/Raio01.png" alt="" class="logo">
+            <span class="nome">
+                Electri<span class="destaque">Swift</span>
+            </span>
+        </div>
+
+        <button class="menu-toggle" aria-label="Abrir menu">≡</button>
+    </header>
+
+    <main class="simulator-container">
+        <section class="simulator-step" data-step="1">
+            <h2 class="step-title">Seleção Rápida de Aparelhos</h2>
+            <div class="step-header">
+                <p class="step-subtitle">Toque nos aparelhos que você possui em casa:</p>
+            </div>
+            
+            
+            <div class="appliances-grid">
+
+                <button class="appliance-card" data-id="ar-condicionado" data-power="2200">
+                    <img src="./assets/congelador.png" alt="icone de ar-condicionado" class="appliance-image">
+                    <span class="appliance-name">Ar-Condicionado</span>
+                    <span class="appliance-power">2200W</span>
+                </button>
+                
+                <button class="appliance-card" data-id="chuveiro" data-power="5500">
+                    <img src="./assets/banheira.png" alt="icone de chuveiro" class="appliance-image">
+                    <span class="appliance-name">Chuveiro</span>
+                    <span class="appliance-power">5500W</span>
+                </button>
+                
+                <button class="appliance-card" data-id="geladeira" data-power="200">
+                    <img src="./assets/geladeira.png" alt="icone de geladeira" class="appliance-image">
+                    <span class="appliance-name">Geladeira</span>
+                    <span class="appliance-power">200W</span>
+                </button>
+
+                <button class="appliance-card" data-id="tv" data-power="150">
+                    <img src="./assets/smart-tv.png" alt="icone de TV" class="appliance-image">
+                    <span class="appliance-name">TV</span>
+                    <span class="appliance-power">150W</span>
+                </button>
+                
+                <button class="appliance-card" data-id="maquina-lavar" data-power="500">
+                    <img src="./assets/lavanderia.png" alt="icone de máquina de lavar" class="appliance-image">
+                    <span class="appliance-name">Máquina de Lavar</span>
+                    <span class="appliance-power">500W</span>
+                </button>
+
+                <button class="appliance-card card-custom" id="btn-open-modal">
+                    <span class="appliance-icon">➕</span>
+                    <span class="appliance-name">Outro Aparelho</span>
+                    <span class="appliance-power">Personalizado</span>
+                </button>
+
+            </div>
+            
+            <div class="sticky-footer">
+                <button id="btn-next-step" class="btn-primary">Continuar</button>
+            </div>
+        </section>
+        
+        <span class="step-counter">1 de 3</span>
+        
+        <!-- Etapa 2: Configuração de Utilização -->
+        <section class="simulator-step" data-step="2">
+            <h2>Configurar Utilização</h2>
+            <!-- Inputs de horas, dias, tarifa -->
+        </section>
+
+        <!-- Etapa 3: Resultados e Gráficos -->
+        <section class="simulator-step" data-step="3">
+            <h2>Resultados da Simulação</h2>
+            <!-- Cards de resumo e gráficos -->
+        </section>
+    </main>
+</body>
+<script src="js/app/app-controller.js" type="module"></script>
+
+</html>
