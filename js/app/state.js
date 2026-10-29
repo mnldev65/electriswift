@@ -1,5 +1,6 @@
 export const state = {
-  selectedAppliances: []
+  selectedAppliances: [],
+  tariff: 0.85
 };
 
 export const toggleApplianceSelection = (applianceData) => {
@@ -15,4 +16,15 @@ export const toggleApplianceSelection = (applianceData) => {
       daysInMonth: 30
     });
   }
+};
+
+export const updateApplianceHours = (id, newHours) => {
+  const appliance = state.selectedAppliances.find(item => item.id === id);
+  if (appliance) {
+    appliance.dailyHours = Number(newHours);
+  }
+};
+
+export const setTariff = (newTariff) => {
+  state.tariff = Number(newTariff);
 };
