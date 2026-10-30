@@ -76,6 +76,28 @@
             <span class="step-counter">1 de 3</span>
         </section>
 
+        <!-- MODAL: Aparelho Personalizado -->
+        <div id="custom-modal" class="modal-overlay">
+            <div class="modal-content">
+                <h3 class="modal-title">Adicionar Aparelho</h3>
+                <p class="modal-subtitle">Informe os dados do seu aparelho personalizado:</p>
+
+                <div class="form-group">
+                    <label for="custom-name">Nome do Aparelho</label>
+                    <input type="text" id="custom-name" placeholder="Ex: Micro-ondas, Ventilador...">
+                </div>
+
+                <div class="form-group">
+                    <label for="custom-power">Potência em Watts (W)</label>
+                    <input type="number" id="custom-power" placeholder="Ex: 1200" min="1">
+                </div>
+
+                <div class="modal-actions">
+                    <button id="btn-save-custom" class="btn-primary-etapa02">Adicionar</button>
+                    <button id="btn-cancel-custom" class="btn-secondary-etapa02">Cancelar</button>
+                </div>
+            </div>
+        </div>
 
         <!-- Etapa 2: Configuração de Utilização -->
         <section class="simulator-step" data-step="2">

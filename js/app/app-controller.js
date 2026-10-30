@@ -39,6 +39,63 @@ btnNextStep1.addEventListener('click', () => {
   renderConfigStep();
 });
 
+const btnOpenModal = document.getElementById('btn-open-modal');
+const modalOverlay = document.getElementById('custom-modal');
+const btnCancelCustom = document.getElementById('btn-cancel-custom');
+const btnSaveCustom = document.getElementById('btn-save-custom');
+const inputCustomName = document.getElementById('custom-name');
+const inputCustomPower = document.getElementById('custom-power');
+const appliancesGrid = document.querySelector('.appliances-grid');
+
+btnOpenModal.addEventListener('click', () => {
+  modalOverlay.style.display = 'flex';
+  inputCustomName.value = ''; 
+  inputCustomPower.value = '';
+  inputCustomName.focus(); 
+});
+
+btnCancelCustom.addEventListener('click', () => {
+  modalOverlay.style.display = 'none';
+});
+
+btnSaveCustom.addEventListener('click', () => {
+  const name = inputCustomName.value.trim();
+  const power = Number(inputCustomPower.value);
+
+  if (!name || isNaN(power) || power <= 0) {
+    alert('Por favor, informe um nome válido e uma potência maior que zero.');
+    return;
+  }
+
+  const customId = `custom-${Date.now()}`;
+
+  state.selectedAppliances.push({
+    id: customId,
+    name: name,
+    power: power,
+    quantity: 1,
+    dailyHours: 4,
+    daysInMonth: 30
+  });
+
+  const newCard = document.createElement('button');
+  newCard.className = 'appliance-card selected'; 
+  newCard.setAttribute('data-id', customId);
+  newCard.setAttribute('data-power', power);
+
+  newCard.innerHTML = `
+    <span class="appliance-icon">⚙️</span>
+    <span class="appliance-name">${name}</span>
+    <span class="appliance-power">${power}W</span>
+  `;
+
+  appliancesGrid.insertBefore(newCard, btnOpenModal);
+
+  modalOverlay.style.display = 'none';
+
+  console.log("Aparelho personalizado adicionado:", state.selectedAppliances);
+});
+
 btnPrevStep1.addEventListener('click', () => {
   goToStep(1);
 });
