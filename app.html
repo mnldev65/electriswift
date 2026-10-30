@@ -94,9 +94,8 @@
             <div id="config-appliances-list">
                 <!-- Injetado via JS -->
             </div>
-            
+
             <span class="step-counter">2 de 3</span>
-            
             <div class="sticky-footer-etapa02" style="display: flex; gap: 10px;">
                 <button id="btn-prev-step-1" class="btn-secondary-etapa02">
                     Voltar
@@ -111,8 +110,35 @@
 
         <!-- Etapa 3: Resultados e Gráficos -->
         <section class="simulator-step" data-step="3">
-            <h2>Resultados da Simulação</h2>
-            <!-- Cards de resumo e gráficos -->
+            <h2 class="step-title-etapa03">Resultados da Simulação</h2>
+            <p class="step-subtitle">Veja o impacto dos seus aparelhos na conta de luz:</p>
+
+            <div class="results-kpi-container">
+                <div class="result-card">
+                    <span class="results-label">Consumo Mensal</span>
+                    <span id="res-total-kwh">0
+                        kWh
+                    </span>
+                </div>
+                <div class="result-card">
+                    <span class="results-label">Custo Estimado</span>
+                    <span id="res-total-cost">R$ 0,00</span>
+                </div>
+            </div>
+
+            <div id="results-appliances-breakdown">
+                <!-- Injetado via JS -->
+            </div>
+
+            <div class="sticky-footer-etapa03">
+                <button id="btn-prev-step-2" class="btn-secondary-etapa03">
+                    Voltar
+                </button>
+
+                <button id="btn-restart" class="btn-primary-etapa03">
+                    Nova Simulação
+                </button>
+            </div>
         </section>
     </main>
 </body>

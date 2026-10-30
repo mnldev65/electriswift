@@ -4,6 +4,8 @@ const applianceCards = document.querySelectorAll('.appliance-card:not(#btn-open-
 const btnNextStep1 = document.getElementById('btn-next-step');
 const btnPrevStep1 = document.getElementById('btn-prev-step-1');
 const btnNextStep3 = document.getElementById('btn-next-step-3');
+const btnPrevStep2 = document.getElementById('btn-prev-step-2');
+const btnRestart = document.getElementById('btn-restart');
 const steps = document.querySelectorAll('.simulator-step');
 
 applianceCards.forEach(card => {
@@ -86,3 +88,69 @@ document.addEventListener('input', (e) => {
     setTariff(e.target.value);
   }
 });
+
+const calculateResults = () => {
+  let totalKWh = 0;
+
+  const evaluatedAppliances = state.selectedAppliances.map(app => {
+    // Fórmula: (Watts * HorasDiárias * 30 dias * Quantidade) / 1000
+    const daysInMonth = 30;
+    const quantity = 1; 
+    
+    const kwh = (app.power * app.dailyHours * daysInMonth * quantity) / 1000;
+    totalKWh += kwh;
+
+    return {
+      ...app,
+      monthlyKWh: kwh
+    };
+  });
+
+  const totalCost = totalKWh * state.tariff;
+
+  return {
+    evaluatedAppliances,
+    totalKWh: totalKWh.toFixed(2),
+    totalCost: totalCost.toFixed(2)
+  };
+};
+
+btnNextStep3.addEventListener('click', () => {
+  goToStep(3);
+  renderResultsStep();
+});
+
+btnPrevStep2.addEventListener('click', () => {
+  goToStep(2);
+});
+
+btnRestart.addEventListener('click', () => {
+  state.selectedAppliances = [];
+  location.reload();
+});
+
+const renderResultsStep = () => {
+  const results = calculateResults();
+
+  document.getElementById('res-total-kwh').textContent = `${results.totalKWh} kWh`;
+  document.getElementById('res-total-cost').textContent = `R$ ${results.totalCost.replace('.', ',')}`;
+
+  const breakdownContainer = document.getElementById('results-appliances-breakdown');
+  breakdownContainer.innerHTML = '<h3 style="font-size: 1rem; color: var(--primary-color); margin-bottom: 8px;">Detalhamento por Aparelho:</h3>';
+
+  results.evaluatedAppliances.forEach(app => {
+    const costApp = (app.monthlyKWh * state.tariff).toFixed(2);
+    
+    breakdownContainer.innerHTML += `
+      <div style="background: var(--card-bg); padding: 12px; border-radius: 8px; border: 1px solid var(--border-color); display: flex; justify-content: space-between; align-items: center;">
+        <div>
+          <strong>${app.name}</strong><br>
+          <small style="color: #64748B;">${app.dailyHours}h/dia • ${app.monthlyKWh.toFixed(1)} kWh</small>
+        </div>
+        <div style="text-align: right; font-weight: bold; color: var(--primary-color);">
+          R$ ${costApp.replace('.', ',')}
+        </div>
+      </div>
+    `;
+  });
+};
