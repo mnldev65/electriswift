@@ -502,3 +502,87 @@ body {
   box-shadow: 0 4px 15px rgba(212, 175, 55, 0.4);
   transition: 0.5s ease-in-out;
 }
+
+#title-modal-etapa02 {
+  font-size: 1.3rem;
+}
+
+#describe-modal-etapa02 {
+  margin: 10px 0 20px 0;
+}
+
+#select-month-type {
+  width: 100%; 
+  padding: 10px; 
+  border-radius: 8px; 
+  border: 2px solid var(--border-color); 
+  background: white;
+}
+
+#calendar-grid-days {
+  display: grid; 
+  grid-template-columns: repeat(7, 1fr); 
+  gap: 6px; 
+  margin: 16px 0; 
+  max-height: 220px; 
+  overflow-y: auto; 
+  padding: 4px;
+}
+
+.calendar-selected {
+  display: flex; 
+  justify-content: space-between; 
+  align-items: center; 
+  margin-bottom: 16px; 
+  font-size: 0.85rem; 
+  color: #64748B;
+}
+
+#btn-select-all-days {
+  background: none; 
+  border: none; 
+  color: var(--accent-color); 
+  font-weight: bold; 
+  cursor: pointer;
+}
+
+.modal-actions {
+  display: flex;
+  flex-direction: row;
+}
+
+#btn-cancel-calendar {
+  margin: 12px 0 0 0;
+  background-color: #ed1313;
+  color: #fff;
+  border: none;
+  padding: 12px 20px;
+  border-radius: 8px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+#btn-cancel-calendar {
+  background-color: #aa0000;
+  color: #fff;
+  transform: translateY(-3px);
+  box-shadow: 0 4px 15px rgba(212, 175, 55, 0.4);
+  transition: 0.5s ease-in-out;
+}
+
+#btn-save-calendar {
+  background-color: var(--color-primary-light);
+  color: var(--color-surface);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  margin: 12px 0 0 0;
+  border: none;
+  padding: 12px 20px;
+  border-radius: 8px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+button.calendar-day-btn.active {
+  background-color: var(--accent-color);
+  border-radius: 4px;
+}

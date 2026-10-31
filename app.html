@@ -127,8 +127,52 @@
                     Ver Resultados
                 </button>
             </div>
-
         </section>
+
+        <!-- MODAL: Calendário Interativo de Dias -->
+        <div id="calendar-modal" class="modal-overlay">
+            <div class="modal-content">
+                <h3 id="title-modal-etapa02">Calendário de Utilização</h3>
+                <p class="modal-subtitle" id="describe-modal-etapa02">
+                    Selecione o mês e clique nos dias que utilizou o aparelho:
+                </p>
+
+                <!-- Seletor de Mês / Dias Totais -->
+                <div class="form-group">
+                    <label for="select-month-type">Mês de Referência:</label>
+                    <select id="select-month-type">
+                        <option value="28">Fevereiro (28 dias)</option>
+                        <option value="30" selected>Mês padrão (30 dias)</option>
+                        <option value="31">Mês longo (31 dias)</option>
+                    </select>
+                </div>
+
+                <!-- Grade de Dias do Mês (Gerada via JS) -->
+                <div id="calendar-grid-days">
+                    <!-- Injetado dinamicamente -->
+                </div>
+
+                <div class="calendar-selected">
+                    <span id="calendar-selected-count">
+                        Total: 30 dias selecionados
+                    </span>
+
+                    <button type="button" id="btn-select-all-days">
+                        Selecionar Todos
+                    </button>
+                </div>
+
+                <div class="modal-actions">
+                    <button id="btn-cancel-calendar">
+                        Cancelar
+                    </button>
+                    
+                    <button id="btn-save-calendar">
+                        Confirmar Dias
+                    </button>
+                </div>
+            </div>
+        </div>
 
         <!-- Etapa 3: Resultados e Gráficos -->
         <section class="simulator-step" data-step="3">
