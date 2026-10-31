@@ -16,7 +16,7 @@ export const toggleApplianceSelection = (applianceData) => {
       quantity: 1,
       dailyHours: 4,  
       monthDaysCount: 30,     
-      selectedDays: []
+      selectedDays: [1]
     });
   }
 };

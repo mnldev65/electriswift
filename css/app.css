@@ -325,22 +325,25 @@ body {
   border: 2px solid var(--border-color);
   text-align: center;
   margin-top: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
 }
 
 .results-label {
-  font-size: 0.8rem;
+  font-size: 1rem;
   color: #64748B;
   display: block;
 }
 
 #res-total-kwh {
-  font-size: 1.5rem;
+  font-size: 1.20rem;
   font-weight: 800;
   color: var(--primary-color);
 }
 
 #res-total-cost {
-  font-size: 1.5rem;
+  font-size: 1.3rem;
   font-weight: 800;
   color: var(--accent-color);
 }
@@ -585,4 +588,158 @@ body {
 button.calendar-day-btn.active {
   background-color: var(--accent-color);
   border-radius: 4px;
+}
+
+.container-etapa04 {
+  background: #F0FDF4; 
+  border: 2px dashed var(--accent-color); 
+  padding: 15px; 
+  border-radius: 12px; 
+  margin-bottom: 16px; 
+  text-align: center;
+}
+
+.acaoRapida {
+  font-size: 0.95rem; 
+  color: var(--primary-color); 
+  margin-bottom: 8px; 
+  font-weight: 600;
+}
+
+.img-raio-etapa04 {
+  width: 20px;
+  height: auto;
+}
+
+.container-imgandP {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 5px;
+  align-items: center;
+  justify-content: center;
+}
+
+#btn-smart-reduction {
+  margin-top: 5px;
+  color: #fff;
+  padding: 10px; 
+  font-size: 0.9rem;
+}
+
+.card-etapa04 {
+  display: grid; 
+  grid-template-columns: 1fr 1fr; 
+  gap: 10px; 
+  margin-bottom: 16px;
+}
+
+.cardA {
+  background: var(--card-bg); 
+  padding: 12px; 
+  border-radius: 10px; 
+  border: 2px solid var(--border-color); 
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 5px
+}
+
+.cardA span {
+  font-size: 0.95rem; 
+  color: #64748B; 
+  display: block;
+  font-weight: bold;
+}
+
+#comparison-kwh-a {
+  font-size: 1.1rem; color: var(--primary-color);
+}
+
+#comparison-cost-a {
+  font-size: 0.85rem; 
+  display: block; 
+  color: var(--accent-color);
+}
+
+.cardB {
+  background: var(--card-bg); 
+  padding: 12px; 
+  border-radius: 10px; 
+  border: 2px solid var(--accent-color); 
+  text-align: center; 
+  background-color: #F0FDF4;
+  display: flex;
+  flex-direction: column;
+  gap: 5px
+}
+
+.cardB span {
+  font-size: 0.95rem; 
+  color: var(--accent-color); 
+  display: block; 
+  font-weight: bold;
+}
+
+#comparison-kwh {
+  font-size: 1.1rem; 
+  color: var(--primary-color);
+}
+
+#comparison-cost-b {
+  font-size: 0.85rem; 
+  display: block; 
+  color: var(--accent-color); 
+  font-weight: bold;
+}
+
+.economiaReal-container {
+  background: var(--primary-color); 
+  color: white; 
+  padding: 14px; 
+  border-radius: 10px; 
+  text-align: center; 
+  margin-bottom: 20px;
+  align-items:center;
+}
+
+.span-economy {
+  font-size: 0.8rem; 
+  opacity: 0.8; 
+  display: block;
+}
+
+#economy-highlight {
+  font-size: 1.2rem; 
+  font-weight: bold; 
+  color: var(--accent-color);
+}
+
+.grafic-container {
+  background: var(--card-bg); 
+  padding: 15px; 
+  border-radius: 12px; 
+  border: 2px solid var(--border-color); 
+  margin-bottom: 20px;
+  height: 400px;
+}
+
+#comparison-chart {
+  width: 100%; 
+  max-height: 400px;
+}
+
+.sticky-footer-etapa04 {
+  display: flex; 
+  gap: 10px;
+}
+
+#btn-prev-step-3 {
+  background: #E2E8F0; 
+  border: none; 
+  padding: 14px; 
+  border-radius: 8px; 
+  font-weight: bold; 
+  cursor: pointer; 
+  width: 30%;
 }

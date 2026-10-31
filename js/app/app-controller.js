@@ -5,7 +5,9 @@ const btnNextStep1 = document.getElementById('btn-next-step');
 const btnPrevStep1 = document.getElementById('btn-prev-step-1');
 const btnNextStep3 = document.getElementById('btn-next-step-3');
 const btnPrevStep2 = document.getElementById('btn-prev-step-2');
-const btnRestart = document.getElementById('btn-restart');
+const btnNextStep4 = document.getElementById('btn-next-step-4');
+const btnPrevStep3 = document.getElementById('btn-prev-step-3');
+const btnRestartFinal = document.getElementById('btn-restart-final');
 const steps = document.querySelectorAll('.simulator-step');
 
 // --- 1. SELEÇÃO DE APARELHOS (ETAPA 1) ---
@@ -76,7 +78,7 @@ btnSaveCustom.addEventListener('click', () => {
     quantity: 1,
     dailyHours: 4,
     monthDaysCount: 30,
-    selectedDays: Array.from({ length: 30 }, (_, i) => i + 1)
+    selectedDays: []
   });
 
   const newCard = document.createElement('button');
@@ -104,17 +106,17 @@ const renderConfigStep = () => {
   container.innerHTML = '';
 
   state.selectedAppliances.forEach(app => {
+    const daysCount = (app.selectedDays && app.selectedDays.length > 0) ? app.selectedDays.length : 30;
+
     const applianceHtml = `
       <div style="background: var(--card-bg); padding: 16px; border-radius: 12px; border: 2px solid var(--border-color); margin-bottom: 12px;">
         <h4 style="margin: 0 0 10px 0; color: var(--primary-color); font-size: 1.1rem;">${app.name} (${app.power}W)</h4>
         
-        <!-- Quantidade -->
         <div style="margin-bottom: 10px; display: flex; justify-content: space-between; align-items: center;">
           <label style="font-size: 0.85rem; color: #64748B;">Quantidade:</label>
           <input type="number" min="1" max="20" value="${app.quantity}" data-id="${app.id}" data-prop="quantity" class="app-input-config" style="width: 70px; padding: 6px; border-radius: 6px; border: 1px solid var(--border-color); text-align: center;">
         </div>
 
-        <!-- Horas de Uso Diário (Minutos em frações, ex: 0.25 = 15min) -->
         <div style="margin-bottom: 12px;">
           <label style="font-size: 0.85rem; color: #64748B; display: block; margin-bottom: 4px;">
             Horas por dia: <span id="hours-val-${app.id}" style="font-weight: bold; color: var(--accent-color);">${app.dailyHours}h</span>
@@ -123,11 +125,10 @@ const renderConfigStep = () => {
           <small style="font-size: 0.75rem; color: #94A3B8;">0.25h = 15min | 0.5h = 30min | 1h = 60min</small>
         </div>
 
-        <!-- Botão do Calendário Interativo de Dias -->
         <div style="display: flex; justify-content: space-between; align-items: center; background: #F8FAFC; padding: 10px; border-radius: 8px; border: 1px solid var(--border-color);">
           <div>
             <span style="font-size: 0.8rem; color: #64748B; display: block;">Dias utilizados:</span>
-            <strong id="days-badge-${app.id}" style="color: var(--primary-color); font-size: 0.9rem;">${app.selectedDays.length} dias no mês</strong>
+            <strong id="days-badge-${app.id}" style="color: var(--primary-color); font-size: 0.9rem;">${daysCount} dias no mês</strong>
           </div>
           <button type="button" class="btn-open-calendar" data-id="${app.id}" style="background: var(--color-primary-light); color: white; border: none; padding: 10px 12px; border-radius: 6px; font-size: 0.95rem; font-weight: bold; cursor: pointer;">
             📅 Alterar Dias
@@ -138,7 +139,6 @@ const renderConfigStep = () => {
     container.innerHTML += applianceHtml;
   });
 
-  // Listener para quantidade e horas
   container.querySelectorAll('.app-input-config').forEach(input => {
     input.addEventListener('input', (e) => {
       const id = e.target.getAttribute('data-id');
@@ -152,7 +152,6 @@ const renderConfigStep = () => {
     });
   });
 
-  // Listener para abrir o modal do calendário de cada aparelho
   container.querySelectorAll('.btn-open-calendar').forEach(btn => {
     btn.addEventListener('click', (e) => {
       const id = e.currentTarget.getAttribute('data-id');
@@ -239,11 +238,11 @@ btnCancelCalendar.addEventListener('click', () => {
 btnSaveCalendar.addEventListener('click', () => {
   updateApplianceCalendar(currentApplianceIdForCalendar, selectMonthType.value, tempSelectedDays);
 
-  document.getElementById(`days-badge-${currentApplianceIdForCalendar}`).textContent = `${tempSelectedDays.length} dias no mês`;
+  const displayDays = tempSelectedDays.length > 0 ? tempSelectedDays.length : 30;
+  document.getElementById(`days-badge-${currentApplianceIdForCalendar}`).textContent = `${displayDays} dias no mês`;
   calendarModal.style.display = 'none';
 });
 
-// Capturar alteração da tarifa global
 document.addEventListener('input', (e) => {
   if (e.target && e.target.id === 'tariff-input') {
     setTariff(e.target.value);
@@ -255,7 +254,11 @@ const calculateResults = () => {
   let totalKWh = 0;
 
   const evaluatedAppliances = state.selectedAppliances.map(app => {
-    const daysUsedCount = app.selectedDays.length; 
+    // Se o usuário não abriu o calendário para escolher dias específicos, assume 30 dias por padrão
+    const daysUsedCount = (app.selectedDays && app.selectedDays.length > 0) 
+      ? app.selectedDays.length 
+      : 30; 
+
     const kwh = (app.power * app.dailyHours * daysUsedCount * app.quantity) / 1000;
     totalKWh += kwh;
 
@@ -284,11 +287,6 @@ btnPrevStep2.addEventListener('click', () => {
   goToStep(2);
 });
 
-btnRestart.addEventListener('click', () => {
-  state.selectedAppliances = [];
-  location.reload();
-});
-
 const renderResultsStep = () => {
   const results = calculateResults();
 
@@ -313,4 +311,48 @@ const renderResultsStep = () => {
       </div>
     `;
   });
+};
+
+// --- 4. TRANSIÇÃO PARA A ETAPA 4 (COMPARAÇÃO DE CENÁRIOS) ---
+if (btnNextStep4) {
+  btnNextStep4.addEventListener('click', () => {
+    goToStep(4);
+    renderScenarioComparisonStep();
+  });
+}
+
+if (btnPrevStep3) {
+  btnPrevStep3.addEventListener('click', () => {
+    goToStep(3);
+  });
+}
+
+if (btnRestartFinal) {
+  btnRestartFinal.addEventListener('click', () => {
+    state.selectedAppliances = [];
+    location.reload();
+  });
+}
+
+
+import { calculateScenarioComparison } from '../domain/scenario-calculator.js';
+import { renderComparisonChart } from '../charts/chart-manager.js';
+
+const renderScenarioComparisonStep = () => {
+  // 1. Processamos os dados chamando o motor de cenários
+  const scenarioData = calculateScenarioComparison(state.selectedAppliances, state.tariff);
+
+  // 2. Atualizamos os cards visuais na Etapa 4
+  document.getElementById('comparison-kwh-a').textContent = `${scenarioData.scenarioA.monthlyKWh} kWh`;
+  document.getElementById('comparison-cost-a').textContent = `R$ ${scenarioData.scenarioA.estimatedCost.toFixed(2).replace('.', ',')}`;
+
+  document.getElementById('comparison-kwh-b').textContent = `${scenarioData.scenarioB.monthlyKWh} kWh`;
+  document.getElementById('comparison-cost-b').textContent = `R$ ${scenarioData.scenarioB.estimatedCost.toFixed(2).replace('.', ',')}`;
+
+  // 3. Atualizamos o destaque de economia real
+  const economyHighlight = document.getElementById('economy-highlight');
+  economyHighlight.textContent = `R$ ${scenarioData.economy.costSaved.toFixed(2).replace('.', ',')} / mês (${scenarioData.economy.percentage}%)`;
+
+  // 4. Renderizamos o gráfico via Chart.js passando o contrato de dados
+  renderComparisonChart(scenarioData);
 };

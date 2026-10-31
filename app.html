@@ -166,7 +166,7 @@
                     <button id="btn-cancel-calendar">
                         Cancelar
                     </button>
-                    
+
                     <button id="btn-save-calendar">
                         Confirmar Dias
                     </button>
@@ -174,7 +174,7 @@
             </div>
         </div>
 
-        <!-- Etapa 3: Resultados e Gráficos -->
+        <!-- Etapa 3: Resultados -->
         <section class="simulator-step" data-step="3">
             <h2 class="step-title-etapa03">Resultados da Simulação</h2>
             <p class="step-subtitle">Veja o impacto dos seus aparelhos na conta de luz:</p>
@@ -182,9 +182,7 @@
             <div class="results-kpi-container">
                 <div class="result-card">
                     <span class="results-label">Consumo Mensal</span>
-                    <span id="res-total-kwh">0
-                        kWh
-                    </span>
+                    <span id="res-total-kwh">0 kWh</span>
                 </div>
                 <div class="result-card">
                     <span class="results-label">Custo Estimado</span>
@@ -196,12 +194,71 @@
                 <!-- Injetado via JS -->
             </div>
 
+            <span class="step-counter">3 de 4</span>
+
             <div class="sticky-footer-etapa03">
                 <button id="btn-prev-step-2" class="btn-secondary-etapa03">
                     Voltar
                 </button>
 
-                <button id="btn-restart" class="btn-primary-etapa03">
+                <button id="btn-next-step-4" class="btn-primary-etapa02">
+                    Comparação de economia
+                </button>
+            </div>
+        </section>
+
+        <!-- Etapa 4: Comparação de Cenários -->
+        <section class="simulator-step" data-step="4">
+            <h2 class="step-title">Comparação de Cenários</h2>
+            <p class="step-subtitle">Compare o seu uso atual com um cenário otimizado:</p>
+
+            <div class="container-etapa04">
+                <div class="container-imgandP">
+                    <img src="./assets/raio (1).png" class="img-raio-etapa04" alt="raio">
+                    <p class="acaoRapida">
+                        Ação Rápida sugerida:
+                    </p>
+                </div>
+                <button id="btn-smart-reduction" class="btn-primary">
+                    Reduzir 1h/dia nos aparelhos pesados
+                </button>
+            </div>
+
+            <div class="card-etapa04">
+                <div class="cardA">
+                    <span>CENÁRIO A (Atual)</span>
+                    <strong id="comparison-kwh-a">0 kWh</strong>
+                    <span id="comparison-cost-a">
+                        R$ 0,00
+                    </span>
+                </div>
+
+                <div class="cardB">
+                    <span>CENÁRIO B (Otimizado)</span>
+                    <strong id="comparison-kwh-b">0 kWh</strong>
+                    <span id="comparison-cost-b">
+                        R$ 0,00
+                    </span>
+                </div>
+            </div>
+
+            <div class="economiaReal-container">
+                <span  class="span-economy">ECONOMIA POTENCIAL</span>
+                <span id="economy-highlight">R$ 0,00 / mês (0%)</span>
+            </div>
+
+            <div class="grafic-container">
+                <canvas id="comparison-chart"></canvas>
+            </div>
+
+            <span class="step-counter">4 de 4</span>
+
+            <div class="sticky-footer-etapa04">
+                <button id="btn-prev-step-3" class="btn-secondary">
+                    Voltar
+                </button>
+
+                <button id="btn-restart-final" class="btn-primary">
                     Nova Simulação
                 </button>
             </div>
@@ -209,5 +266,6 @@
     </main>
 </body>
 <script src="js/app/app-controller.js" type="module"></script>
-
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="js/app/app-controller.js" type="module"></script>
 </html>
