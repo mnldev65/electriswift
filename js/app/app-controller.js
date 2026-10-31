@@ -339,20 +339,16 @@ import { calculateScenarioComparison } from '../domain/scenario-calculator.js';
 import { renderComparisonChart } from '../charts/chart-manager.js';
 
 const renderScenarioComparisonStep = () => {
-  // 1. Processamos os dados chamando o motor de cenários
   const scenarioData = calculateScenarioComparison(state.selectedAppliances, state.tariff);
 
-  // 2. Atualizamos os cards visuais na Etapa 4
   document.getElementById('comparison-kwh-a').textContent = `${scenarioData.scenarioA.monthlyKWh} kWh`;
   document.getElementById('comparison-cost-a').textContent = `R$ ${scenarioData.scenarioA.estimatedCost.toFixed(2).replace('.', ',')}`;
 
   document.getElementById('comparison-kwh-b').textContent = `${scenarioData.scenarioB.monthlyKWh} kWh`;
   document.getElementById('comparison-cost-b').textContent = `R$ ${scenarioData.scenarioB.estimatedCost.toFixed(2).replace('.', ',')}`;
 
-  // 3. Atualizamos o destaque de economia real
   const economyHighlight = document.getElementById('economy-highlight');
   economyHighlight.textContent = `R$ ${scenarioData.economy.costSaved.toFixed(2).replace('.', ',')} / mês (${scenarioData.economy.percentage}%)`;
 
-  // 4. Renderizamos o gráfico via Chart.js passando o contrato de dados
   renderComparisonChart(scenarioData);
 };
