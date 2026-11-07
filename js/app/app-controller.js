@@ -350,5 +350,6 @@ const renderScenarioComparisonStep = () => {
   const economyHighlight = document.getElementById('economy-highlight');
   economyHighlight.textContent = `R$ ${scenarioData.economy.costSaved.toFixed(2).replace('.', ',')} / mês (${scenarioData.economy.percentage}%)`;
 
+
   renderComparisonChart(scenarioData);
 };

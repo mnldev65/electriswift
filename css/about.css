@@ -1,0 +1,231 @@
+:root {
+  --primary-color: #0B3B24;
+  --accent-color: #10B981;
+  --bg-surface: #F8FAFC;
+  --card-bg: #FFFFFF;
+  --text-main: #0F172A;
+  --border-color: #E2E8F0;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: system-ui, -apple-system, sans-serif;
+  background-color: var(--bg-surface);
+  color: var(--text-main);
+}
+
+.app-header {
+  background-color: var(--primary-color);
+  color: #FFFFFF;
+  padding: 16px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: bold;
+  font-size: 1.1rem;
+}
+
+.logo {
+  width: 50px;
+  height: 50px;
+  object-fit: contain;
+}
+
+.nome {
+  font-size: 2.3rem;
+  font-weight: 800;
+  line-height: 1.2;
+  letter-spacing: -1px;
+  font-family: emoji;
+}
+
+.destaque {
+  color: var(--accent-color);
+}
+
+.menu-toggle {
+  background: none;
+  border: none;
+  color: #FFFFFF;
+  font-size: 2.5rem;
+  cursor: pointer;
+}
+
+.simulador-container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.step-header {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 16px;
+  margin-top: 24px;
+  margin-left: 16px;
+}
+
+.step-title {
+  font-size: 1.8rem;
+  font-weight: bold;
+  color: var(--primary-color);
+}
+
+.step-subtitle {
+  font-size: 1rem;
+  color: #64748B;
+  line-height: 1.5;
+  width: 95%;
+  margin-bottom: 12px;
+}
+
+.passoapasso {
+    color: var(--primary-color); 
+    font-size: 1.5rem; 
+    margin-bottom: 16px;
+    display: flex;
+    justify-content: center;
+}
+
+.container-caixas-intrucoes {
+    display: flex; 
+    flex-direction: column; 
+    gap: 10px; 
+    margin: 0 20px;
+}
+
+.accordion-card {
+  background: var(--card-bg);
+  border: 1px solid var(--border-color);
+  border-radius: 10px;
+  margin-bottom: 10px;
+  overflow: hidden;
+  transition: border-color 0.2s ease;
+}
+
+.accordion-card:hover {
+  border-color: var(--accent-color);
+}
+
+.accordion-header {
+  width: 100%;
+  background: none;
+  border: none;
+  padding: 14px 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  text-align: left;
+  cursor: pointer;
+}
+
+.accordion-title {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--primary-color);
+}
+
+.accordion-icon {
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  transition: transform 0.3s ease;
+}
+
+.accordion-body {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.35s cubic-bezier(0, 1, 0, 1);
+  padding: 0 16px;
+  background: #FAFAFA;
+  border-top: 1px solid transparent;
+}
+
+.accordion-card.active .accordion-body {
+  max-height: 10000px; 
+  transition: max-height 0.35s ease-in;
+  padding: 14px 16px 18px 16px;
+  border-top-color: var(--border-color);
+}
+
+.accordion-card.active .accordion-icon {
+  transform: rotate(180deg);
+  color: var(--accent-color);
+}
+
+.accordion-text {
+  font-size: 1rem;
+  font-weight: 500;
+  color: var(--text-muted);
+  margin: 0 10px 32px 10px;
+  text-align: justify;
+  line-height: 1.5;
+}
+
+.preview-screen {
+  width: 100%;
+  border-radius: 6px;
+  border: 1px solid var(--border-color);
+  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+  display: block;
+}
+
+.section-heading {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: var(--primary-color);
+    margin-top: 24px;
+    margin-bottom: 16px;
+    text-align: center;
+}
+.math-box {
+  background: white;
+  padding: 12px;
+  border-radius: 8px;
+  border: 1px solid var(--border-color);
+  text-align: center;
+  margin-bottom: 12px;
+}
+
+.math-formula {
+  font-size: 0.8rem;
+  color: var(--primary-color);
+  font-weight: bold;
+}
+
+.math-list {
+  font-size: 0.82rem;
+  color: var(--text-muted);
+  padding-left: 18px;
+  margin: 0;
+  line-height: 1.6;
+}
+
+.footer-btn-container {
+  text-align: center;
+  margin-top: 30px;
+}
+
+.btn-simulator {
+  display: block;
+  text-align: center;
+  text-decoration: none;
+  background: var(--primary-color);
+  color: white;
+  padding: 14px;
+  border-radius: 8px;
+  font-weight: bold;
+  font-size: 0.95rem;
+}
