@@ -353,3 +353,37 @@ const renderScenarioComparisonStep = () => {
 
   renderComparisonChart(scenarioData);
 };
+
+const menuToggleBtn = document.getElementById('menu-toggle-btn');
+const sideDrawer = document.getElementById('side-drawer');
+const navOverlay = document.getElementById('nav-overlay');
+const drawerCloseBtn = document.getElementById('drawer-close-btn');
+const drawerRestartBtn = document.getElementById('drawer-restart-btn');
+
+const openDrawer = () => {
+  if (sideDrawer && navOverlay) {
+    sideDrawer.classList.add('active');
+    navOverlay.classList.add('active');
+  }
+};
+
+const closeDrawer = () => {
+  if (sideDrawer && navOverlay) {
+    sideDrawer.classList.remove('active');
+    navOverlay.classList.remove('active');
+  }
+};
+
+if (menuToggleBtn) menuToggleBtn.addEventListener('click', openDrawer);
+if (drawerCloseBtn) drawerCloseBtn.addEventListener('click', closeDrawer);
+if (navOverlay) navOverlay.addEventListener('click', closeDrawer);
+
+// Ação do botão de reiniciar dentro do menu
+if (drawerRestartBtn) {
+  drawerRestartBtn.addEventListener('click', () => {
+    if (confirm('Deseja reiniciar a simulação atual?')) {
+      state.selectedAppliances = [];
+      location.reload();
+    }
+  });
+}

@@ -19,8 +19,31 @@
             </span>
         </div>
 
-        <button class="menu-toggle" aria-label="Abrir menu">≡</button>
+        <button 
+            id="menu-toggle-btn" 
+            class="menu-toggle" 
+            aria-label="Abrir menu">≡
+        </button>
+
     </header>
+
+    <div id="nav-overlay" class="nav-overlay"></div>
+    <aside id="side-drawer" class="side-drawer">
+        <div class="drawer-header">
+            <span class="drawer-title">Menu ElectriSwift</span>
+            <button id="drawer-close-btn" class="drawer-close">✕</button>
+        </div>
+
+        <nav class="drawer-nav">
+            <a href="index.html" class="drawer-link">Início</a>
+            <a href="about.html" class="drawer-link">Como Funciona</a>
+            <button id="drawer-restart-btn" class="drawer-link drawer-btn-action">Reiniciar Simulação</button>
+        </nav>
+
+        <div class="drawer-footer">
+            <small>ElectriSwift v1.0 • Eficiência Energética</small>
+        </div>
+    </aside>
 
     <main class="simulator-container">
         <section class="simulator-step active" data-step="1">
@@ -243,7 +266,7 @@
             </div>
 
             <div class="economiaReal-container">
-                <span  class="span-economy">ECONOMIA POTENCIAL</span>
+                <span class="span-economy">ECONOMIA POTENCIAL</span>
                 <span id="economy-highlight">R$ 0,00 / mês (0%)</span>
             </div>
 
@@ -268,4 +291,5 @@
 <script src="js/app/app-controller.js" type="module"></script>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script src="js/app/app-controller.js" type="module"></script>
+
 </html>
