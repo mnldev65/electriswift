@@ -7,7 +7,7 @@
 
     <meta name="description" content="Entenda o consumo de energia da sua casa com o ElectriSwift.">
 
-    <link rel="stylesheet" href="./style.css">
+    <link rel="stylesheet" href="./css/style.css">
     <script src="./script.js" defer></script>
 
     <title>ElectriSwift | Consumo de energia</title>
@@ -15,7 +15,6 @@
 
 <body>
     <header class="site-header">
-
         <div class="brand">
             <img src="./assets/Raio01.png" alt="" class="logo">
 
@@ -23,44 +22,46 @@
                 Electri<span class="destaque">Swift</span>
             </span>
         </div>
-
-        <nav class="navBar" aria-label="Navegação principal">
-            <ul>
-                <li><a href="#home">Início</a></li>
-                <li><a href="#sobre">Sobre</a></li>
-                <li><a href="#aparelhos">Aparelhos</a></li>
-            </ul>
-        </nav>
-
     </header>
 
     <main>
         <section id="home" class="hero" aria-labelledby="hero-titulo">
+            <div class="heroContainer">
+                <div class="heroTexto">
+                    <h1 id="hero-titulo">
+                        Entenda o consumo de energia da sua casa
+                    </h1>
 
-            <h1 id="hero-titulo">
-                Entenda o consumo de energia da sua casa
-            </h1>
+                    <p>
+                        Calcule o consumo dos seus aparelhos, estime seus gastos
+                        e descubra oportunidades para economizar.
+                    </p>
 
-            <p>
-                Calcule o consumo dos seus aparelhos, estime seus gastos
-                e descubra oportunidades para economizar.
-            </p>
-
-            <img src="./assets/raio (1).png"
-                alt="Raio amarelo cercado por setas verdes, representando energia e eficiência." class="hero-imagem">
-
+                    
+                </div>
+                <img src="./assets/raio (1).png"
+                alt="Raio amarelo cercado por setas verdes, representando energia e eficiência."
+                class="hero-imagem">
+            </div>
+            
             <div class="hero-acoes">
 
-                <a href="#aparelhos" class="btnComecar">
-                    Começar agora
+                <a href="./app.html" class="btnComecar" id="btnComecar-mobile">
+                    Começar agora 
                 </a>
 
-                <a href="#sobre" class="btnSaibaMais">
+                <a 
+                    href="./appDesktop.html" 
+                    class="btnComecar" 
+                    id="btnComecar-desktop"
+                    >Começar agora 
+                </a>
+
+                <a href="./about.html" class="btnSaibaMais">
                     Saiba mais
                 </a>
 
             </div>
-
         </section>
     </main>
 

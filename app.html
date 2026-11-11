@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Entenda o consumo de energia da sua casa com o ElectriSwift.">
+    <link rel="stylesheet" href="css/tokens.css">
+    <link rel="stylesheet" href="./css/app.css">
+    <title>ElectriSwift | Home</title>
+</head>
+
+<body>
+    <header class="app-header">
+        <div class="logo-wrapper">
+            <img src="./assets/Raio01.png" alt="" class="logo">
+            <span class="nome">
+                Electri<span class="destaque">Swift</span>
+            </span>
+        </div>
+
+        <button 
+            id="menu-toggle-btn" 
+            class="menu-toggle" 
+            aria-label="Abrir menu">≡
+        </button>
+
+    </header>
+
+    <div id="nav-overlay" class="nav-overlay"></div>
+    <aside id="side-drawer" class="side-drawer">
+        <div class="drawer-header">
+            <span class="drawer-title">Menu ElectriSwift</span>
+            <button id="drawer-close-btn" class="drawer-close">✕</button>
+        </div>
+
+        <nav class="drawer-nav">
+            <a href="index.html" class="drawer-link">Início</a>
+            <a href="about.html" class="drawer-link">Como Funciona</a>
+            <button id="drawer-restart-btn" class="drawer-link drawer-btn-action">Reiniciar Simulação</button>
+        </nav>
+
+        <div class="drawer-footer">
+            <small>ElectriSwift v1.0 • Eficiência Energética</small>
+        </div>
+    </aside>
+
+    <main class="simulator-container">
+        <section class="simulator-step active" data-step="1">
+            <h2 class="step-title">Seleção Rápida de Aparelhos</h2>
+            <div class="step-header">
+                <p class="step-subtitle">Toque nos aparelhos que você possui em casa:</p>
+            </div>
+
+
+            <div class="appliances-grid">
+
+                <button class="appliance-card" data-id="ar-condicionado" data-power="2200">
+                    <img src="./assets/congelador.png" alt="icone de ar-condicionado" class="appliance-image">
+                    <span class="appliance-name">Ar-Condicionado</span>
+                    <span class="appliance-power">2200W</span>
+                </button>
+
+                <button class="appliance-card" data-id="chuveiro" data-power="5500">
+                    <img src="./assets/banheira.png" alt="icone de chuveiro" class="appliance-image">
+                    <span class="appliance-name">Chuveiro</span>
+                    <span class="appliance-power">5500W</span>
+                </button>
+
+                <button class="appliance-card" data-id="geladeira" data-power="200">
+                    <img src="./assets/geladeira.png" alt="icone de geladeira" class="appliance-image">
+                    <span class="appliance-name">Geladeira</span>
+                    <span class="appliance-power">200W</span>
+                </button>
+
+                <button class="appliance-card" data-id="tv" data-power="150">
+                    <img src="./assets/smart-tv.png" alt="icone de TV" class="appliance-image">
+                    <span class="appliance-name">TV</span>
+                    <span class="appliance-power">150W</span>
+                </button>
+
+                <button class="appliance-card" data-id="maquina-lavar" data-power="500">
+                    <img src="./assets/lavanderia.png" alt="icone de máquina de lavar" class="appliance-image">
+                    <span class="appliance-name">Máquina de Lavar</span>
+                    <span class="appliance-power">500W</span>
+                </button>
+
+                <button class="appliance-card card-custom" id="btn-open-modal">
+                    <span class="appliance-icon">➕</span>
+                    <span class="appliance-name">Outro Aparelho</span>
+                    <span class="appliance-power">Personalizado</span>
+                </button>
+
+            </div>
+
+            <div class="sticky-footer">
+                <button id="btn-next-step" class="btn-primary">Continuar</button>
+            </div>
+            <span class="step-counter">1 de 3</span>
+        </section>
+
+        <!-- MODAL: Aparelho Personalizado -->
+        <div id="custom-modal" class="modal-overlay">
+            <div class="modal-content">
+                <h3 class="modal-title">Adicionar Aparelho</h3>
+                <p class="modal-subtitle">Informe os dados do seu aparelho personalizado:</p>
+
+                <div class="form-group">
+                    <label for="custom-name">Nome do Aparelho</label>
+                    <input type="text" id="custom-name" placeholder="Ex: Micro-ondas, Ventilador...">
+                </div>
+
+                <div class="form-group">
+                    <label for="custom-power">Potência em Watts (W)</label>
+                    <input type="number" id="custom-power" placeholder="Ex: 1200" min="1">
+                </div>
+
+                <div class="modal-actions">
+                    <button id="btn-save-custom" class="btn-primary-etapa02">Adicionar</button>
+                    <button id="btn-cancel-custom" class="btn-secondary-etapa02">Cancelar</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Etapa 2: Configuração de Utilização -->
+        <section class="simulator-step" data-step="2">
+            <h2 class="step-title-etapa02">Configurar Utilização</h2>
+            <p class="step-subtitle-etapa02">Ajuste o tempo de uso dos seus aparelhos:</p>
+
+            <div class="tariff-card">
+                <label for="tariff-input">
+                    Tarifa de Energia (R$/kWh)
+                </label>
+
+                <input type="number" id="tariff-input" value="0.85" step="0.01" min="0"
+                    placeholder="Digite a tarifa de energia">
+            </div>
+
+            <div id="config-appliances-list">
+                <!-- Injetado via JS -->
+            </div>
+
+            <span class="step-counter">2 de 3</span>
+            <div class="sticky-footer-etapa02" style="display: flex; gap: 10px;">
+                <button id="btn-prev-step-1" class="btn-secondary-etapa02">
+                    Voltar
+                </button>
+
+                <button id="btn-next-step-3" class="btn-primary-etapa02">
+                    Ver Resultados
+                </button>
+            </div>
+        </section>
+
+        <!-- MODAL: Calendário Interativo de Dias -->
+        <div id="calendar-modal" class="modal-overlay">
+            <div class="modal-content">
+                <h3 id="title-modal-etapa02">Calendário de Utilização</h3>
+                <p class="modal-subtitle" id="describe-modal-etapa02">
+                    Selecione o mês e clique nos dias que utilizou o aparelho:
+                </p>
+
+                <!-- Seletor de Mês / Dias Totais -->
+                <div class="form-group">
+                    <label for="select-month-type">Mês de Referência:</label>
+                    <select id="select-month-type">
+                        <option value="28">Fevereiro (28 dias)</option>
+                        <option value="30" selected>Mês padrão (30 dias)</option>
+                        <option value="31">Mês longo (31 dias)</option>
+                    </select>
+                </div>
+
+                <!-- Grade de Dias do Mês (Gerada via JS) -->
+                <div id="calendar-grid-days">
+                    <!-- Injetado dinamicamente -->
+                </div>
+
+                <div class="calendar-selected">
+                    <span id="calendar-selected-count">
+                        Total: 30 dias selecionados
+                    </span>
+
+                    <button type="button" id="btn-select-all-days">
+                        Selecionar Todos
+                    </button>
+                </div>
+
+                <div class="modal-actions">
+                    <button id="btn-cancel-calendar">
+                        Cancelar
+                    </button>
+
+                    <button id="btn-save-calendar">
+                        Confirmar Dias
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Etapa 3: Resultados -->
+        <section class="simulator-step" data-step="3">
+            <h2 class="step-title-etapa03">Resultados da Simulação</h2>
+            <p class="step-subtitle">Veja o impacto dos seus aparelhos na conta de luz:</p>
+
+            <div class="results-kpi-container">
+                <div class="result-card">
+                    <span class="results-label">Consumo Mensal</span>
+                    <span id="res-total-kwh">0 kWh</span>
+                </div>
+                <div class="result-card">
+                    <span class="results-label">Custo Estimado</span>
+                    <span id="res-total-cost">R$ 0,00</span>
+                </div>
+            </div>
+
+            <div id="results-appliances-breakdown">
+                <!-- Injetado via JS -->
+            </div>
+
+            <span class="step-counter">3 de 4</span>
+
+            <div class="sticky-footer-etapa03">
+                <button id="btn-prev-step-2" class="btn-secondary-etapa03">
+                    Voltar
+                </button>
+
+                <button id="btn-next-step-4" class="btn-primary-etapa02">
+                    Comparação de economia
+                </button>
+            </div>
+        </section>
+
+        <!-- Etapa 4: Comparação de Cenários -->
+        <section class="simulator-step" data-step="4">
+            <h2 class="step-title">Comparação de Cenários</h2>
+            <p class="step-subtitle">Compare o seu uso atual com um cenário otimizado:</p>
+
+            <div class="container-etapa04">
+                <div class="container-imgandP">
+                    <img src="./assets/raio (1).png" class="img-raio-etapa04" alt="raio">
+                    <p class="acaoRapida">
+                        Ação Rápida sugerida:
+                    </p>
+                </div>
+                <button id="btn-smart-reduction" class="btn-primary">
+                    Reduzir 1h/dia nos aparelhos pesados
+                </button>
+            </div>
+
+            <div class="card-etapa04">
+                <div class="cardA">
+                    <span>CENÁRIO A (Atual)</span>
+                    <strong id="comparison-kwh-a">0 kWh</strong>
+                    <span id="comparison-cost-a">
+                        R$ 0,00
+                    </span>
+                </div>
+
+                <div class="cardB">
+                    <span>CENÁRIO B (Otimizado)</span>
+                    <strong id="comparison-kwh-b">0 kWh</strong>
+                    <span id="comparison-cost-b">
+                        R$ 0,00
+                    </span>
+                </div>
+            </div>
+
+            <div class="economiaReal-container">
+                <span class="span-economy">ECONOMIA POTENCIAL</span>
+                <span id="economy-highlight">R$ 0,00 / mês (0%)</span>
+            </div>
+
+            <div class="grafic-container">
+                <canvas id="comparison-chart"></canvas>
+            </div>
+
+            <span class="step-counter">4 de 4</span>
+
+            <div class="sticky-footer-etapa04">
+                <button id="btn-prev-step-3" class="btn-secondary">
+                    Voltar
+                </button>
+
+                <button id="btn-restart-final" class="btn-primary">
+                    Nova Simulação
+                </button>
+            </div>
+        </section>
+    </main>
+</body>
+<script src="js/app/app-controller.js" type="module"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="js/app/app-controller.js" type="module"></script>
+
+</html>

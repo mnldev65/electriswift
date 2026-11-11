@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Saiba como funciona o simulador de energia ElectriSwift.">
+    <link rel="stylesheet" href="css/tokens.css">
+    <link rel="stylesheet" href="./css/about.css">
+    <title>ElectriSwift | Como Funciona</title>
+</head>
+
+<body>
+    <header class="app-header">
+        <div class="logo-wrapper">
+            <img src="./assets/Raio01.png" alt="" class="logo">
+            <span class="nome">
+                Electri<span class="destaque">Swift</span>
+            </span>
+        </div>
+    </header>
+
+    <main class="simulator-container">
+        <div class="step-header">
+            <h2 class="step-title">Como Funciona o ElectriSwift?</h2>
+            <p class="step-subtitle">
+                Entenda o passo a passo da simulação e a lógica por trás dos cálculos de energia da sua casa.
+            </p>
+        </div>
+
+        <section>
+            <h3 class="passoapasso">Introdução ao ElectriSwift</h3>
+
+            <div class="container-caixas-intrucoes">
+                <div class="accordion-card">
+                    <button class="accordion-header">
+                        <span class="accordion-title">1. Seleção de Aparelhos</span>
+                        <span class="accordion-icon">▼</span>
+                    </button>
+                    <div class="accordion-body">
+                        <p class="accordion-text">
+                            Você escolhe os eletrodomésticos que possui na lista rápida ou cadastra um aparelho
+                            personalizado informando o nome e a potência em Watts (W).
+                        </p>
+                        <img src="./assets/etapa01.png" alt="Prévia da Etapa 1 Mobile" class="preview-screen">
+                        <img src="./assets/outro aparelho.png" alt="Prévia da Etapa 1 Mobile" class="preview-screen"
+                            style="margin-top: 12px;">
+                    </div>
+                </div>
+
+                <div class="accordion-card">
+                    <button class="accordion-header">
+                        <span class="accordion-title">2. Configurar Utilização</span>
+                        <span class="accordion-icon">▼</span>
+                    </button>
+                    <div class="accordion-body">
+                        <p class="accordion-text">
+                            Define a quantidade de aparelhos, o tempo diário de uso (com frações de hora) e utiliza o
+                            <strong>Calendário Interativo</strong> para marcar os dias do
+                            mês. Além disso, informa a tarifa de energia em Reais (R$) por quilowatt-hora (kWh) para
+                            calcular o custo estimado.
+                        </p>
+                        <img src="./assets/etapa02.png" alt="Prévia da Etapa 2 Mobile" class="preview-screen">
+                    </div>
+                </div>
+
+                <div class="accordion-card">
+                    <button class="accordion-header">
+                        <span class="accordion-title">3. Resultados da Simulação</span>
+                        <span class="accordion-icon">▼</span>
+                    </button>
+                    <div class="accordion-body">
+                        <p class="accordion-text">
+                            O sistema processa o consumo mensal total em quilowatt-hora (kWh) e o custo estimado em
+                            Reais (R$) com base na tarifa configurada. Diante disso, o usuário analisa os custos de cada
+                            aparelho.
+                        </p>
+                        <img src="./assets/etapa03.png" alt="Prévia da Etapa 3 Mobile" class="preview-screen">
+                    </div>
+                </div>
+
+                <div class="accordion-card">
+                    <button class="accordion-header">
+                        <span class="accordion-title">4. Comparação de Cenários</span>
+                        <span class="accordion-icon">▼</span>
+                    </button>
+                    <div class="accordion-body">
+                        <p class="accordion-text">
+                            Compara o seu consumo atual com um cenário otimizado de economia através de gráficos
+                            dinâmicos de barras agrupadas. Diante disso, o usuário visualiza o impacto de cada aparelho
+                            no consumo total e no custo da conta de energia. Logo, pode tomar decisões mais conscientes
+                            sobre o uso de energia em sua residência.
+                        </p>
+                        <img src="./assets/etapa04.png" alt="Prévia da Etapa 4 Mobile" class="preview-screen">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <h3 class="section-heading">A Lógica dos Cálculos</h3>
+
+            <div class="container-caixas-intrucoes">
+                <div class="accordion-card">
+                    <button class="accordion-header">
+                        <span class="accordion-title">Como a matemática do sistema funciona?</span>
+                        <span class="accordion-icon">▼</span>
+                    </button>
+                    <div class="accordion-body">
+                        <p class="accordion-text">O simulador traduz a potência elétrica e o tempo de uso em energia
+                            acumulada no mês:</p>
+                        <div class="math-box">
+                            <code class="math-formula">Consumo (kWh) = (W × Horas × Dias × Qtd) ÷ 1000</code>
+                        </div>
+                        <ul class="math-list">
+                            <li><strong>Potência (W):</strong> Consumo do aparelho por hora.</li>
+                            <li><strong>Divisão por 1000:</strong> Converte Watts para Quilowatts (kW).</li>
+                            <li><strong>Dias:</strong> Dias exatos marcados no calendário (ou padrão de 30).</li>
+                            <li><strong>Custo (R$):</strong> Total de kWh multiplicado pela tarifa local.</li>
+                        </ul>
+                        <p class="accordion-text">Além disso, o custo total é calculado multiplicando o consumo em kWh pela tarifa vigente:</p>
+                        <div class="math-box">
+                            <code class="math-formula">Custo (R$) = Consumo (kWh) × Tarifa (R$/kWh)</code>
+                        </div>
+                        
+                        <p class="accordion-text">
+                            Para calcular o cenário otimizado, o sistema aplica uma redução percentual no tempo de uso de cada aparelho, simulando hábitos mais eficientes e econômicos.
+                        </p>
+
+                        <div class="math-box">
+                            <code class="math-formula">Cenário Otimizado = Consumo Atual × (1 - Redução Percentual)</code>
+                        </div>
+
+                        <p class="accordion-text">
+                            A partir disso, o sistema gera gráficos de barras agrupadas para comparar o consumo e o custo
+                            de cada aparelho, permitindo ao usuário identificar os maiores consumidores de energia e
+                            tomar decisões mais conscientes sobre o uso de energia em sua residência.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div style="text-align: center; margin-top: 30px;">
+            <a href="index.html" class="btn-primary"
+                style="display: block; text-align: center; text-decoration: none; padding: 14px; border-radius: 8px; font-weight: bold;">
+                Ir para o Simulador
+            </a>
+        </div>
+    </main>
+    <script src="./js/script.js"></script>
+</body>
+
+</html>
