@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./css/appDesktop.css">
+    <title>ElectriSwift | Soluções Energéticas Inteligentes</title>
+</head>
+<body>
+    <header class="app-header">
+        <div class="logo-wrapper">
+            <img src="./assets/Raio01.png" alt="" class="logo">
+            <h1 class="nome">
+                Electri<span class="destaque">Swift</span>
+            </h1>
+        </div>
+
+        <ul class="drawer-links">
+            <li class="drawer-link-item">
+                <a href="./index.html">Início</a>
+            </li>
+
+            <li class="drawer-link-item">
+                <a href="./about.html">Sobre</a>
+            </li>
+        </ul>
+
+        <button 
+            id="drawer-restart-btn" 
+            class="btn-action"
+            >Reiniciar
+        </button>
+    </header>
+
+    <main>
+        <section class="Etapa01">
+            <div class="container-etapa01">
+                <div class="container-etapa01-esquerdo">
+                    <h1 class="etapa01-titulo">
+                        Cadastre
+                        <span class="destaque">seu aparelho</span>
+                    </h1>
+
+                    <p class="etapa01-descricao">
+                        Informe os dados do seu aparelho para calcular o consumo de energia e estimar os seus gastos.
+                    </p>
+
+                    <div class="ilustracao-wrapper">
+                        <img src="./assets/lampadaverde.png" alt="Ilustração Lâmpada ElectriSwift" class="etapa01-ilustracao">
+                    </div>
+
+                    <ul class="etapa01-beneficios-esquerdo">
+                        <li class="etapa01-beneficio">Calculo de energia</li>
+                        <li class="etapa01-beneficio">Previsão de gastos</li>
+                        <li class="etapa01-beneficio">Mais controle sobre seu consumo</li>
+                    </ul>
+                </div>
+
+                <div class="container-etapa01-direito">
+                    <h2 class="card-header-title-h2">Informações de Aparelhos</h2>
+                    <div class="divider-line"></div>
+
+                    <form class="etapa01-direito-form">
+                        <div class="input-group-custom">
+                            <label 
+                                for="nome-aparelho" class="etapa01-direito-label"
+                            >Nome do Aparelho
+                            </label>
+                            
+                            <div class="input-with-icon">
+                                <span class="input-icon">📱</span>
+                                <input type="text" id="nome-aparelho" name="nome-aparelho" placeholder="Ex: Chuveiro">
+                            </div>
+                        </div>
+
+                        <!-- Categoria do Aparelho -->
+                        <div class="input-group-custom">
+                            <label for="categoria-aparelho" class="etapa01-direito-label">Categoria do Aparelho</label>
+                            <div class="input-with-icon">
+                                <span class="input-icon">🗂️</span>
+                                <select id="categoria-aparelho" name="categoria-aparelho">
+                                    <option value="" disabled selected>Selecione a categoria</option>
+                                    <option value="cozinha">Cozinha</option>
+                                    <option value="climatizacao">Climatização</option>
+                                    <option value="lavanderia">Lavanderia</option>
+                                    <option value="sala">Sala / Entretenimento</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <!-- Potência e Tempo de Uso (Lado a Lado) -->
+                        <div class="informacoes-aparelho-grid">
+                            <div class="input-group-custom">
+                                <label for="potencia" class="etapa01-direito-label">Potência (W)</label>
+                                <div class="input-with-icon">
+                                    <span class="input-icon">⚡</span>
+                                    <input type="number" id="potencia" name="potencia" placeholder="5500 W">
+                                </div>
+                            </div>
+                            
+                            <div class="input-group-custom">
+                                <label for="tempo-uso" class="etapa01-direito-label">Tempo de Uso (horas por dia)</label>
+                                <div class="input-with-icon">
+                                    <span class="input-icon">⏱️</span>
+                                    <input type="number" id="tempo-uso" name="tempo-uso" placeholder="1 hora">
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Dias de Uso no Mês -->
+                        <div class="input-group-custom">
+                            <label class="etapa01-direito-label">Dias de Uso no Mês</label>
+                            <div class="input-with-icon calendar-trigger">
+                                <span class="input-icon">📅</span>
+                                <input type="text" readonly placeholder="Selecione os dias em que o aparelho é utilizado no mês.">
+                                <span class="input-icon-right">📅</span>
+                            </div>
+                        </div>
+
+                        <!-- Botão Continuar -->
+                        <button type="submit" class="btn-continuar-desktop">
+                            Continuar
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+        <section class="Etapa02"></section>
+        <section class="Etapa03"></section>
+        <section class="Etapa04"></section>
+    </main>
+</body>
+</html>
