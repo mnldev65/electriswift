@@ -2,60 +2,78 @@
 
 **Entenda o consumo de energia da sua casa e descubra onde é possível economizar.**
 
-ElectriSwift é uma aplicação web responsiva em desenvolvimento que ajuda pessoas a estimar o consumo de energia de aparelhos domésticos, calcular custos aproximados e comparar cenários de uso.
+O **ElectriSwift** é uma aplicação web responsiva em desenvolvimento que ajuda pessoas a estimar o consumo de energia de aparelhos domésticos, calcular custos aproximados e comparar cenários de uso.
 
-> **Aviso:** os valores apresentados pelo ElectriSwift são estimativas calculadas a partir dos dados informados pelo usuário. Eles não substituem a conta da concessionária e podem não incluir impostos, bandeiras tarifárias, taxas ou regras específicas da distribuidora.
+> **Aviso:** Os valores apresentados pelo ElectriSwift são estimativas calculadas a partir dos dados informados pelo usuário. Eles não substituem a conta da concessionária e podem não incluir impostos, bandeiras tarifárias, taxas ou regras específicas da distribuidora.
 
 ## 🎯 Objetivo
 
-Construir uma ferramenta simples e fácil de usar que transforme informações sobre aparelhos e hábitos de uso em estimativas compreensíveis de consumo mensal e custo.
+Construir uma ferramenta moderna, intuitiva e fácil de usar que transforme informações sobre aparelhos e hábitos de uso em estimativas compreensíveis de consumo mensal e custo financeiro.
 
-## ✨ Funcionalidades planejadas
+## 🚀 Status do Projeto & Progresso
 
-### Primeira versão (MVP)
+O projeto encontra-se em **desenvolvimento ativo**, com a arquitetura de interface e layout da **Etapa 1 (Cadastro de Aparelho)** finalizados tanto na versão Mobile quanto no Desktop!
 
-- [ ] Apresentar a proposta do ElectriSwift e permitir iniciar o uso.
-- [ ] Cadastrar aparelhos com nome, potência em watts (W), horas de uso por dia e dias de uso por mês.
-- [ ] Listar e remover aparelhos cadastrados.
-- [ ] Informar a tarifa de energia em reais por quilowatt-hora (R$/kWh).
-- [ ] Calcular consumo mensal estimado por aparelho e total (kWh).
-- [ ] Estimar custo por aparelho e custo total mensal.
-- [ ] Comparar o cenário atual com um cenário de economia ajustando o uso dos aparelhos.
-- [ ] Apresentar resultados de forma clara em telas que se adaptam a desktop e celular.
-- [ ] Guardar os dados no navegador usando `localStorage`, depois que as funções principais estiverem funcionando.
+### 📱 Versão Mobile
+- [x] **Tela Inicial:** Apresentação da proposta e botão de início.
+- [x] **Sobre (`about.html`):** Explicação técnica do projeto e da lógica computacional.
+- [x] **Seleção Rápida de Aparelhos (Etapa 1):** Interface em cards para escolha de eletrodomésticos comuns ou personalizados.
+- [x] **Configurar Utilização (Etapa 2):** Definição da tarifa de energia (R$/kWh), quantidade, tempo de uso diário e dias no mês.
+- [x] **Resultados da Simulação (Etapa 3):** Exibição do consumo total em kWh, custo estimado e detalhamento por aparelho.
+- [x] **Comparação de Cenários (Etapa 4):** Análise comparativa entre o uso atual e o cenário otimizado com gráficos de barras (Chart.js).
+- [ ] **Resumo Final (Etapa 5):** Síntese final e recomendações de economia.
 
-### Melhorias futuras
+### 🖥️ Versão Desktop
+- [x] **Landing Page (`index.html`):** Apresentação do propósito e acesso à aplicação.
+- [x] **Sobre (`about.html`):** Explicação técnica do projeto e da lógica computacional.(será melhorado nas próximas fases)
+- [x] **Cadastrar Aparelho (`appDesktop.html` - Etapa 01):** Interface dedicada em *Split Screen* com formulário em card flutuante e campos estilizados.
+- [ ] **Etapas Subsequentes (02 a 05):** Estão sendo planejadas para as próximas fases.
 
-- [ ] Gráficos mais completos e histórico mensal.
-- [ ] Exportação ou impressão de um resumo.
-- [ ] Sugestões de economia personalizadas a partir dos dados cadastrados.
-- [ ] Testes automatizados e melhorias de acessibilidade.
+### ⚙️ Geral & Infraestrutura
+- [x] Deploy e hospedagem automática configurados no **GitHub Pages**.
+- [x] Lógica JavaScript para captação e validação dos dados dos formulários. (somente na versão mobile, mas será acrescentado no desktop futuramente)
+- [x] Cálculo dinâmico de consumo mensal (kWh) e estimativa financeira (R$). (somente na versão mobile, mas será acrescentado no desktop futuramente)
+- [ ] Persistência de dados com `localStorage`.
 
-Essas melhorias não fazem parte do primeiro objetivo obrigatório; serão consideradas conforme o aprendizado e o tempo disponível.
+## 🌐 Acesse o Projeto Online
+
+O projeto já está publicado e pode ser visualizado diretamente pelo GitHub Pages:
+👉 **[Acessar ElectriSwift no GitHub Pages](https://mnldev65.github.io/electriswift/)**
+
+---
 
 ## 🖥️ Telas e fluxo de uso
 
-O projeto começará como uma aplicação de página única: as áreas principais ficam organizadas dentro da mesma aplicação, e a navegação leva o usuário à seção desejada. Não é necessário criar cinco sites ou páginas HTML diferentes.
+Para garantir a melhor experiência em qualquer tela, o ElectriSwift adota fluxos adaptados ao contexto de cada dispositivo:
 
-1. **Tela inicial** — apresenta o propósito do ElectriSwift e um botão para começar.
-2. **Aparelhos** — permite adicionar aparelhos e consultar ou remover itens da lista.
-3. **Resultados** — mostra consumo mensal estimado em kWh, custo aproximado e a contribuição de cada aparelho.
-4. **Comparação de cenários** — compara o consumo atual com uma alternativa de uso reduzido e mostra a possível economia estimada.
-5. **Resumo final** — reúne os principais números e dicas simples para ajudar a interpretar os resultados.
+### 📱 Fluxo Mobile
+Na versão mobile, a navegação é guiada por etapas sequenciais e intuitivas:
 
-### Navegação em desktop
+1. **Tela Inicial (Landing Page / `index.html`)** — Apresenta o propósito do ElectriSwift e direciona para a aplicação.
+2. **Sobre (`about.html`)** — Explica a lógica computacional e os passos de cálculo do projeto.
+3. **Seleção Rápida de Aparelhos** — Escolha rápida dos aparelhos através de cartões visuais.
+4. **Configurar Utilização** — Ajuste da tarifa de energia, quantidade e tempo de uso diário.
+5. **Resultados da Simulação** — Apresentação do consumo acumulado (kWh) e custo financeiro (R$).
+6. **Comparação de Cenários** — Comparativo visual em gráficos entre o cenário atual e o otimizado.
+7. **Resumo Final *(Planejado)*** — Reunião dos principais indicadores e dicas práticas.
 
-A navegação principal ficará no cabeçalho. A área de conteúdo usará o espaço horizontal para organizar formulários, cartões de resumo e listas lado a lado quando houver largura suficiente.
+*Fluxo:* `Tela inicial → Seleção de Aparelhos → Configurar Utilização → Resultados → Comparação de Cenários → Resumo Final`
 
-### Navegação em mobile
+### 🖥️ Fluxo Desktop
+Na versão desktop, a experiência utiliza o conceito de *Split Screen* e aproveita o espaço horizontal para maior conforto visual:
 
-O conteúdo ficará em uma coluna, com formulários e cartões ocupando a largura disponível. Os botões serão fáceis de tocar e a navegação será compacta, podendo usar uma barra inferior. Não deve ser necessário rolar horizontalmente para ler os resultados.
+1. **Tela Inicial (Landing Page / `index.html`)** — Apresenta a proposta e direciona para a aplicação.
+2. **Sobre (`about.html`)** — Explica a lógica computacional e os passos de cálculo do projeto.
+3. **Cadastrar Aparelho (Etapa 01 / `appDesktop.html`)** — Formulário flutuante moderno para inserção de nome, categoria, potência, tempo de uso e dias no mês.
+4. **Etapas futuras (ainda em planejamento)**
+   - Apresentação do consumo acumulado (kWh) e custo financeiro (R$)
+   - Comparativo visual em gráficos entre o cenário atual e o otimizado
+   - Reunião dos principais indicadores e dicas práticas
 
-### Fluxo principal
 
-`Tela inicial → Aparelhos → Resultados → Comparação de cenários → Resumo final`
+*Fluxo:* `Tela inicial → Cadastro de Aparelhos → Etapas seguintes ainda sendo planejadas`
 
-O usuário também poderá voltar às telas de aparelhos e resultados para corrigir dados e conferir novamente os cálculos.
+---
 
 ## 🧮 Como os cálculos funcionarão
 
@@ -71,63 +89,56 @@ Para cada aparelho:
 
 O total da casa será a soma dos valores de todos os aparelhos cadastrados. Para a primeira versão, o cenário econômico será calculado com base na alteração de horas de uso dos aparelhos escolhidos.
 
-## 🧰 Tecnologias
+---
 
-- **HTML5** — estrutura semântica do conteúdo.
-- **CSS3** — aparência, layout e adaptação a diferentes tamanhos de tela.
-- **JavaScript** — validação dos formulários, cálculos e interação.
-- **localStorage (planejado)** — persistência dos dados no próprio navegador, sem conta ou backend.
-- **Git e GitHub** — versionamento e publicação do código.
+## 🧰 Tecnologias Utilizadas
+
+- **HTML5** — estrutura semântica.
+- **CSS3** — Layout moderno com CSS Grid, Flexbox, variáveis nativas e estilização avançada de formulários.
+- **JavaScript (Vanilla)** — Lógica de aplicação pura executada no cliente (Client-side) para validação de formulários, cálculos dinâmicos e transição de telas.
+- **LocalStorage** — Persistência leve dos dados no navegador do usuário, sem necessidade de banco de dados backend.
+- **Git & GitHub** — Versionamento de código, gestão de branches (`main`, `rascunho/hero-desktop`) e publicação remota via GitHub Pages.
 
 A primeira versão não exige React, servidor, autenticação nem banco de dados remoto. Essas tecnologias poderão ser estudadas em projetos posteriores, quando houver uma necessidade concreta.
+---
 
-## 📁 Estrutura inicial dos arquivos
+## 📁 Estrutura de Arquivos do Projeto
 
 ```text
 electriswift/
-├── index.html   # Estrutura da aplicação
-├── style.css    # Estilos e layout responsivo
-├── script.js    # Interações e cálculos
-└── README.md    # Documentação do projeto
+├── assets/               # Imagens, ícones e ilustrações da aplicação
+├── css/                  # Estilos organizados em módulos
+│   ├── about.css
+│   ├── app.css
+│   ├── appDesktop.css
+│   ├── layout.css
+│   ├── style.css
+│   └── tokens.css
+├── js/                   # Scripts e lógica da aplicação
+│   ├── app/
+│   │   ├── app-controller.js
+│   │   ├── controller-desktop.js
+│   │   ├── main.js
+│   │   └── state.js
+│   ├── charts/
+│   │   └── chart-manager.js
+│   ├── data/
+│   ├── domain/
+│   ├── storage/
+│   ├── tests/
+│   ├── ui/
+│   └── script.js
+├── about.html            # Página de explicação técnica e sobre o projeto
+├── app.html              # Interface principal da aplicação mobile
+├── appDesktop.html       # Interface dedicada para visualização em Desktop
+├── index.html            # Landing Page principal do projeto
+└── README.md             # Documentação completa do projeto
 ```
 
-Os arquivos poderão ser separados em pastas à medida que o projeto crescer. No início, manter a estrutura simples facilitará o aprendizado.
+## Licença
 
-## ▶️ Como executar
+Atualmente, o ElectriSwift está em desenvolvimento e ainda não possui uma licença de software definida. Embora o repositório seja público no GitHub, isso não significa que o código esteja liberado para reutilização, modificação ou redistribuição por terceiros. Por enquanto, o código-fonte é disponibilizado publicamente para consulta e acompanhamento do desenvolvimento, sem concessão de uma licença aberta.
 
-1. Baixe ou clone este repositório.
-2. Abra a pasta do projeto no Visual Studio Code.
-3. Abra o `index.html` no navegador. Durante o desenvolvimento, também será possível usar uma extensão como Live Server.
+A definição da licença será avaliada futuramente, de acordo com os objetivos e a evolução do projeto.
 
-## ♿ Responsividade e acessibilidade
-
-- Usar HTML semântico e rótulos associados aos campos dos formulários.
-- Permitir navegar e preencher campos com teclado.
-- Manter contraste de texto e botões legível.
-- Informar erros de preenchimento de forma clara.
-- Usar unidades e textos que não dependam apenas de cores para comunicar informação.
-- Testar o layout em telas largas e estreitas.
-
-## 🗺️ Plano de desenvolvimento
-
-1. Definir o HTML semântico das telas e seus campos.
-2. Criar o CSS base e os layouts para desktop e mobile.
-3. Implementar cadastro, listagem e remoção de aparelhos.
-4. Adicionar validação e cálculos de consumo e custo.
-5. Implementar comparação de cenários e resumo.
-6. Salvar e recuperar dados no `localStorage`.
-7. Testar situações normais e entradas inválidas, revisar acessibilidade e documentar o uso.
-
-## 📌 Estado do projeto
-
-**Planejamento e design inicial.** As funcionalidades acima são objetivos de desenvolvimento; não devem ser consideradas implementadas até serem codificadas e testadas.
-
-## 📄 Licença
-
-A licença deste projeto ainda não foi escolhida. Mesmo que o repositório no GitHub seja público, isso não significa automaticamente que outras pessoas têm permissão para reutilizar, modificar ou redistribuir o código.
-
-Antes de publicar o projeto como software de código aberto, vamos escolher uma licença e adicionar um arquivo chamado `LICENSE` à raiz do repositório.
-
-Uma opção comum para projetos de portfólio é a licença MIT, que permite usar, modificar e distribuir o código, desde que os avisos de direitos autorais e da licença sejam mantidos. Só vamos adotá-la se essa for a permissão que você deseja conceder.
-
-Para conhecer os termos, consulte a [explicação sobre a licença MIT](https://choosealicense.com/licenses/mit/).
+**Observação:** as bibliotecas e dependências de terceiros utilizadas no projeto permanecem sujeitas às respectivas licenças.
