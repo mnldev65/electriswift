@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./css/appDesktop.css">
     <title>ElectriSwift | Soluções Energéticas Inteligentes</title>
 </head>
+
 <body>
     <header class="app-header">
         <div class="logo-wrapper">
@@ -25,10 +27,7 @@
             </li>
         </ul>
 
-        <button 
-            id="drawer-restart-btn" 
-            class="btn-action"
-            >Reiniciar
+        <button id="drawer-restart-btn" class="btn-action">Reiniciar
         </button>
     </header>
 
@@ -46,7 +45,8 @@
                     </p>
 
                     <div class="ilustracao-wrapper">
-                        <img src="./assets/lampadaverde.png" alt="Ilustração Lâmpada ElectriSwift" class="etapa01-ilustracao">
+                        <img src="./assets/lampadaverde.png" alt="Ilustração Lâmpada ElectriSwift"
+                            class="etapa01-ilustracao">
                     </div>
 
                     <ul class="etapa01-beneficios-esquerdo">
@@ -62,62 +62,46 @@
 
                     <form class="etapa01-direito-form">
                         <div class="input-group-custom">
-                            <label 
-                                for="nome-aparelho" class="etapa01-direito-label"
-                            >Nome do Aparelho
-                            </label>
-                            
-                            <div class="input-with-icon">
-                                <span class="input-icon">📱</span>
-                                <input type="text" id="nome-aparelho" name="nome-aparelho" placeholder="Ex: Chuveiro">
-                            </div>
+                            <label for="nome-aparelho" class="etapa01-direito-label">Nome do Aparelho</label>
+                            <input type="text" id="nome-aparelho" name="nome-aparelho" placeholder="Ex: Chuveiro">
                         </div>
 
-                        <!-- Categoria do Aparelho -->
                         <div class="input-group-custom">
                             <label for="categoria-aparelho" class="etapa01-direito-label">Categoria do Aparelho</label>
-                            <div class="input-with-icon">
-                                <span class="input-icon">🗂️</span>
-                                <select id="categoria-aparelho" name="categoria-aparelho">
-                                    <option value="" disabled selected>Selecione a categoria</option>
-                                    <option value="cozinha">Cozinha</option>
-                                    <option value="climatizacao">Climatização</option>
-                                    <option value="lavanderia">Lavanderia</option>
-                                    <option value="sala">Sala / Entretenimento</option>
-                                </select>
-                            </div>
+                            <select id="categoria-aparelho" name="categoria-aparelho">
+                                <option value="" disabled selected>Selecione a categoria</option>
+                                <option value="cozinha">Cozinha</option>
+                                <option value="climatizacao">Climatização</option>
+                                <option value="lavanderia">Lavanderia</option>
+                                <option value="sala">Sala / Entretenimento</option>
+                            </select>
                         </div>
 
-                        <!-- Potência e Tempo de Uso (Lado a Lado) -->
                         <div class="informacoes-aparelho-grid">
                             <div class="input-group-custom">
                                 <label for="potencia" class="etapa01-direito-label">Potência (W)</label>
-                                <div class="input-with-icon">
-                                    <span class="input-icon">⚡</span>
-                                    <input type="number" id="potencia" name="potencia" placeholder="5500 W">
-                                </div>
+                                <input type="number" id="potencia" name="potencia" placeholder="5500 W">
                             </div>
-                            
+
                             <div class="input-group-custom">
-                                <label for="tempo-uso" class="etapa01-direito-label">Tempo de Uso (horas por dia)</label>
-                                <div class="input-with-icon">
-                                    <span class="input-icon">⏱️</span>
-                                    <input type="number" id="tempo-uso" name="tempo-uso" placeholder="1 hora">
-                                </div>
+                                <label for="tempo-uso" class="etapa01-direito-label">Tempo de Uso (horas por
+                                    dia)</label>
+                                <input type="number" id="tempo-uso" name="tempo-uso" placeholder="1 hora">
                             </div>
                         </div>
 
                         <!-- Dias de Uso no Mês -->
                         <div class="input-group-custom">
                             <label class="etapa01-direito-label">Dias de Uso no Mês</label>
-                            <div class="input-with-icon calendar-trigger">
-                                <span class="input-icon">📅</span>
-                                <input type="text" readonly placeholder="Selecione os dias em que o aparelho é utilizado no mês.">
-                                <span class="input-icon-right">📅</span>
+
+                            <div class="dias-uso-display-box" id="btn-abrir-calendario">
+                                <span id="dias-selecionados-texto">30 dias no mês</span>
+                                <button type="button" class="btn-alterar-dias">
+                                    📅 Alterar Dias
+                                </button>
                             </div>
                         </div>
 
-                        <!-- Botão Continuar -->
                         <button type="submit" class="btn-continuar-desktop">
                             Continuar
                         </button>
@@ -131,4 +115,5 @@
         <section class="Etapa04"></section>
     </main>
 </body>
+
 </html>
