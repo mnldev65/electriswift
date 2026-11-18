@@ -60,52 +60,47 @@
                     <h2 class="card-header-title-h2">Informações de Aparelhos</h2>
                     <div class="divider-line"></div>
 
-                    <form class="etapa01-direito-form">
-                        <div class="input-group-custom">
-                            <label for="nome-aparelho" class="etapa01-direito-label">Nome do Aparelho</label>
-                            <input type="text" id="nome-aparelho" name="nome-aparelho" placeholder="Ex: Chuveiro">
+                    <div class="search-filter-bar">
+                        <div class="search-input-wrapper">
+                            <input 
+                            type="text" 
+                            id="input-busca-aparelho"
+                            placeholder="Digite o nome de um aparelho ou selecione da lista...">
+
+                            <button class="btn-search">
+                                <img 
+                                src="./assets/procurar.png" 
+                                alt="Ícone de Busca" 
+                                class="search-icon-btn">
+                            </button>
                         </div>
 
-                        <div class="input-group-custom">
-                            <label for="categoria-aparelho" class="etapa01-direito-label">Categoria do Aparelho</label>
-                            <select id="categoria-aparelho" name="categoria-aparelho">
-                                <option value="" disabled selected>Selecione a categoria</option>
-                                <option value="cozinha">Cozinha</option>
-                                <option value="climatizacao">Climatização</option>
-                                <option value="lavanderia">Lavanderia</option>
-                                <option value="sala">Sala / Entretenimento</option>
-                            </select>
-                        </div>
-
-                        <div class="informacoes-aparelho-grid">
-                            <div class="input-group-custom">
-                                <label for="potencia" class="etapa01-direito-label">Potência (W)</label>
-                                <input type="number" id="potencia" name="potencia" placeholder="5500 W">
-                            </div>
-
-                            <div class="input-group-custom">
-                                <label for="tempo-uso" class="etapa01-direito-label">Tempo de Uso (horas por
-                                    dia)</label>
-                                <input type="number" id="tempo-uso" name="tempo-uso" placeholder="1 hora">
-                            </div>
-                        </div>
-
-                        <!-- Dias de Uso no Mês -->
-                        <div class="input-group-custom">
-                            <label class="etapa01-direito-label">Dias de Uso no Mês</label>
-
-                            <div class="dias-uso-display-box" id="btn-abrir-calendario">
-                                <span id="dias-selecionados-texto">30 dias no mês</span>
-                                <button type="button" class="btn-alterar-dias">
-                                    📅 Alterar Dias
-                                </button>
-                            </div>
-                        </div>
-
-                        <button type="submit" class="btn-continuar-desktop">
-                            Continuar
+                        <button type="button" id="btn-filtro-categoria" class="btn-filtro-desktop">
+                            Filtrar
                         </button>
-                    </form>
+                    </div>
+
+                    <div id="lista-resultados-busca" class="resultados-busca-container">
+                        <!-- Preenchido dinamicamente pelo JS quando o usuário digita ou filtra -->
+                    </div>
+
+                    <div id="aparelhos-adicionados-container" class="aparelhos-adicionados-lista">
+                        <!-- Cards adicionados aparecem aqui -->
+                    </div>
+
+                    <div class="resumo-geral-card">
+                        <div class="resumo-geral-info">
+                            <span class="resumo-titulo">
+                                Consumo Mensal Estimado
+                            </span>
+                        </div>
+                        <div class="resumo-valor-total" id="consumo-total-geral">0,00 kWh</div>
+                    </div>
+
+                    <!-- Botão Ver Resultados -->
+                    <button type="button" id="btn-ver-resultados" class="btn-continuar-desktop" disabled>
+                        Ver Resultados
+                    </button>
                 </div>
             </div>
         </section>
@@ -115,5 +110,5 @@
         <section class="Etapa04"></section>
     </main>
 </body>
-
+<script src="./js/app/controller-desktop.js"></script>
 </html>
