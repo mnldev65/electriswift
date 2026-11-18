@@ -62,45 +62,45 @@
 
                     <div class="search-filter-bar">
                         <div class="search-input-wrapper">
-                            <input 
-                            type="text" 
-                            id="input-busca-aparelho"
-                            placeholder="Digite o nome de um aparelho ou selecione da lista...">
-
-                            <button class="btn-search">
-                                <img 
-                                src="./assets/procurar.png" 
-                                alt="Ícone de Busca" 
-                                class="search-icon-btn">
-                            </button>
+                            <input type="text" id="input-busca-aparelho" placeholder="Digite o nome de um aparelho...">
                         </div>
-
-                        <button type="button" id="btn-filtro-categoria" class="btn-filtro-desktop">
-                            Filtrar
+                        <button type="button" id="btn-abrir-modal-filtro" class="btn-filtro-desktop">
+                            Filtrar Categorias
                         </button>
                     </div>
 
-                    <div id="lista-resultados-busca" class="resultados-busca-container">
-                        <!-- Preenchido dinamicamente pelo JS quando o usuário digita ou filtra -->
-                    </div>
+                    <div id="lista-resultados-busca" class="resultados-busca-container"></div>
 
-                    <div id="aparelhos-adicionados-container" class="aparelhos-adicionados-lista">
-                        <!-- Cards adicionados aparecem aqui -->
-                    </div>
+                    <div id="aparelhos-adicionados-container" class="aparelhos-adicionados-lista"></div>
 
                     <div class="resumo-geral-card">
                         <div class="resumo-geral-info">
-                            <span class="resumo-titulo">
-                                Consumo Mensal Estimado
-                            </span>
+                            <span class="resumo-titulo">Consumo Mensal Estimado</span>
                         </div>
                         <div class="resumo-valor-total" id="consumo-total-geral">0,00 kWh</div>
                     </div>
 
-                    <!-- Botão Ver Resultados -->
                     <button type="button" id="btn-ver-resultados" class="btn-continuar-desktop" disabled>
                         Ver Resultados
                     </button>
+
+                    <div id="modal-filtro-categorias" class="modal-overlay" style="display: none;">
+                        <div class="modal-content">
+                            <h3>Selecionar Categorias</h3>
+                            <div class="modal-categorias-lista">
+                                <label><input type="checkbox" value="climatizacao"> Climatizacao & Ventilacao</label>
+                                <label><input type="checkbox" value="cozinha"> Cozinha & Eletrodomesticos</label>
+                                <label><input type="checkbox" value="lavanderia"> Lavanderia & Limpeza</label>
+                                <label><input type="checkbox" value="banheiro"> Banheiros & Higiene</label>
+                                <label><input type="checkbox" value="sala"> Sala & Entretenimento</label>
+                                <label><input type="checkbox" value="escritorio"> Escritorio & Informatica</label>
+                                <label><input type="checkbox" value="iluminacao"> Iluminacao Geral</label>
+                                <label><input type="checkbox" value="outros"> Outros & Diversos</label>
+                            </div>
+                            <button type="button" id="btn-fechar-modal-filtro" class="btn-continuar-desktop">Aplicar e
+                                Fechar</button>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
@@ -111,4 +111,5 @@
     </main>
 </body>
 <script src="./js/app/controller-desktop.js"></script>
+
 </html>
