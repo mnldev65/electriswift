@@ -69,13 +69,18 @@
                         </button>
                     </div>
 
+                    <div class="tarifa-config-box">
+                        <label for="input-tarifa-kwh">Tarifa de energia (R$/kWh):</label>
+                        <input type="number" id="input-tarifa-kwh" step="0.01" min="0.01" value="0.85">
+                    </div>
+
                     <div id="lista-resultados-busca" class="resultados-busca-container"></div>
 
                     <div id="aparelhos-adicionados-container" class="aparelhos-adicionados-lista"></div>
 
                     <div class="resumo-geral-card">
                         <div class="resumo-geral-info">
-                            <span class="resumo-titulo">Consumo Mensal Estimado</span>
+                            <span class="resumo-titulo">Consumo Estimado</span>
                         </div>
                         <div class="resumo-valor-total" id="consumo-total-geral">0,00 kWh</div>
                     </div>

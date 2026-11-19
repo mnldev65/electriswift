@@ -35,7 +35,7 @@ const catalogoAparelhosPorCategoria = {
     banheiro: {
         titulo: "Banheiros & Higiene",
         aparelhos: [
-            { id: 401, nome: "Chuveiro elétrico (Posição Inverno)", potencia: 5500, horas: 0.5, dias: 30, qtde: 1 },
+            { id: 401, nome: "Chuveiro elétrico", potencia: 5500, horas: 0.5, dias: 30, qtde: 1 },
             { id: 402, nome: "Secador de cabelo", potencia: 1400, horas: 0.2, dias: 20, qtde: 1 },
             { id: 403, nome: "Chapinha / Modelador de cachos", potencia: 40, horas: 0.3, dias: 20, qtde: 1 }
         ]
@@ -43,7 +43,7 @@ const catalogoAparelhosPorCategoria = {
     sala: {
         titulo: "Sala & Entretenimento",
         aparelhos: [
-            { id: 501, nome: "Televisão (Smart TV LED)", potencia: 100, horas: 5, dias: 30, qtde: 1 },
+            { id: 501, nome: "Televisão (Smart TV)", potencia: 100, horas: 5, dias: 30, qtde: 1 },
             { id: 502, nome: "Console de Videogame", potencia: 150, horas: 3, dias: 20, qtde: 1 },
             { id: 503, nome: "Aparelho de som / Home Theater", potencia: 80, horas: 2, dias: 15, qtde: 1 },
             { id: 504, nome: "Roteador Wi-Fi (Ligado direto)", potencia: 15, horas: 24, dias: 30, qtde: 1 }
@@ -52,7 +52,7 @@ const catalogoAparelhosPorCategoria = {
     escritorio: {
         titulo: "Escritório & Informática",
         aparelhos: [
-            { id: 601, nome: "Computador Desktop (Gamer/Trabalho)", potencia: 350, horas: 6, dias: 25, qtde: 1 },
+            { id: 601, nome: "Computador Desktop", potencia: 350, horas: 6, dias: 25, qtde: 1 },
             { id: 602, nome: "Notebook", potencia: 65, horas: 6, dias: 25, qtde: 1 },
             { id: 603, nome: "Monitor externo adicional", potencia: 30, horas: 6, dias: 25, qtde: 1 },
             { id: 604, nome: "Impressora", potencia: 50, horas: 0.2, dias: 10, qtde: 1 }
@@ -78,7 +78,7 @@ const catalogoAparelhosPorCategoria = {
 };
 
 let aparelhosNaResidencia = [];
-let temporizadoresSliders = {};
+let temporizadoresEdicao = {};
 
 document.addEventListener("DOMContentLoaded", () => {
     const inputBusca = document.getElementById("input-busca-aparelho");
@@ -89,6 +89,16 @@ document.addEventListener("DOMContentLoaded", () => {
     const btnAbrirModal = document.getElementById("btn-abrir-modal-filtro");
     const btnFecharModal = document.getElementById("btn-fechar-modal-filtro");
     const modalFiltro = document.getElementById("modal-filtro-categorias");
+    const inputTarifa = document.getElementById("input-tarifa-kwh");
+
+    function obterTarifaAtual() {
+        const valor = parseFloat(inputTarifa?.value);
+        return !isNaN(valor) && valor > 0 ? valor : 0.85;
+    }
+
+    function calcularConsumoItem(item) {
+        return ((item.potencia / 1000) * item.horas * item.dias) * item.qtde;
+    }
 
     btnAbrirModal.addEventListener("click", () => {
         modalFiltro.style.display = "flex";
@@ -110,6 +120,12 @@ document.addEventListener("DOMContentLoaded", () => {
         executarBusca();
     });
 
+    if (inputTarifa) {
+        inputTarifa.addEventListener("input", () => {
+            recalcularTotalGeral();
+        });
+    }
+
     function executarBusca() {
         const termo = inputBusca.value.toLowerCase().trim();
         const checkboxes = modalFiltro.querySelectorAll("input[type='checkbox']:checked");
@@ -129,8 +145,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
             const categoriaObj = catalogoAparelhosPorCategoria[chaveCat];
             categoriaObj.aparelhos.forEach(aparelho => {
-                const combinaNome = aparelho.nome.toLowerCase().includes(termo);
-                if (combinaNome) {
+                if (aparelho.nome.toLowerCase().includes(termo)) {
                     encontrados.push({ ...aparelho, categoriaTitulo: categoriaObj.titulo });
                 }
             });
@@ -200,43 +215,84 @@ document.addEventListener("DOMContentLoaded", () => {
         atualizarPainelResidencia();
     }
 
+    function agendarRecalculo(item, spanConsumo) {
+        if (temporizadoresEdicao[item.uuid]) {
+            clearTimeout(temporizadoresEdicao[item.uuid]);
+        }
+
+        spanConsumo.style.opacity = "0.5";
+
+        temporizadoresEdicao[item.uuid] = setTimeout(() => {
+            const novoConsumo = calcularConsumoItem(item);
+            spanConsumo.textContent = `${novoConsumo.toFixed(2)} kWh/mês`;
+            spanConsumo.style.opacity = "1";
+            recalcularTotalGeral();
+        }, 3000);
+    }
+
     function atualizarPainelResidencia() {
         containerAdicionados.innerHTML = "";
         let consumoTotalGeral = 0;
 
         aparelhosNaResidencia.forEach(item => {
-            const consumoMensal = ((item.potencia / 1000) * item.horas * item.dias) * item.qtde;
+            const consumoMensal = calcularConsumoItem(item);
             consumoTotalGeral += consumoMensal;
+
+            const bloqueadoAttr = !item.editando ? "disabled" : "";
 
             const card = document.createElement("div");
             card.classList.add("aparelho-card-horizontal");
-            
+
             card.innerHTML = `
-                <div class="card-info-basica">
-                    <strong>${item.nome}</strong>
-                    <span>Potência: ${item.potencia} W</span>
-                </div>
-                
-                <div class="card-slider-wrapper">
-                    <label>Horas por dia: <span class="val-horas">${item.horas}h</span></label>
-                    <input type="range" min="0.5" max="24" step="0.5" value="${item.horas}" 
-                        class="slider-horas" ${!item.editando ? 'disabled' : ''}>
-                </div>
+            <strong>${item.nome}</strong>
+                <div class="conatiner-aparelho">
+                    <div class="card-info-basica">
+                        <label>
+                            Potência (W):
+                            <input type="number" class="input-potencia" min="1" step="1" value="${item.potencia}" ${bloqueadoAttr}>
+                        </label>
+                        <label>
+                            Qtd:
+                            <input type="number" class="input-qtde" min="1" step="1" value="${item.qtde}" ${bloqueadoAttr}>
+                        </label>
+                    </div>
 
-                <div class="card-consumo-individual">
-                    ${consumoMensal.toFixed(2)} kWh/mês
-                </div>
+                    <div class="card-horas-wrapper">
+                        <label>
+                            Horas por dia:
+                            <input type="number" class="input-horas" min="0.5" max="24" step="0.5" value="${item.horas}" ${bloqueadoAttr}>
+                        </label>
+                    </div>
 
-                <div class="card-acoes">
-                    <button type="button" class="btn-toggle-edicao">
-                        ${item.editando ? 'Terminar' : 'Editar'}
-                    </button>
-                    <button type="button" class="btn-remover-item">Excluir</button>
+                    <div class="card-calendario-wrapper">
+                        <button
+                            type="button"
+                            class="btn-calendario-item"
+                            ${bloqueadoAttr}>
+                            <img
+                                src="./assets/calendar.png"
+                                class="calendario-btn"
+                                alt="botão de calendario interativo"/>
+                        </button>
+                    </div>
+
+                    <div class="card-consumo-individual">
+                        ${consumoMensal.toFixed(2)} kWh/mês
+                    </div>
+
+                    <div class="card-acoes">
+                        <button type="button" class="btn-toggle-edicao">
+                            ${item.editando ? 'Terminar' : 'Editar'}
+                        </button>
+                        <button type="button" class="btn-remover-item">Excluir</button>
+                    </div>
                 </div>
             `;
 
             const btnEditar = card.querySelector(".btn-toggle-edicao");
-            const slider = card.querySelector(".slider-horas");
+            const inputPotencia = card.querySelector(".input-potencia");
+            const inputQtde = card.querySelector(".input-qtde");
+            const inputHoras = card.querySelector(".input-horas");
             const btnRemover = card.querySelector(".btn-remover-item");
             const spanConsumo = card.querySelector(".card-consumo-individual");
 
@@ -245,27 +301,31 @@ document.addEventListener("DOMContentLoaded", () => {
                 atualizarPainelResidencia();
             });
 
-            slider.addEventListener("input", (e) => {
-                const novaHora = parseFloat(e.target.value);
-                item.horas = novaHora;
-                card.querySelector(".val-horas").textContent = `${item.horas}h`;
+            inputPotencia.addEventListener("input", (e) => {
+                const val = parseFloat(e.target.value);
+                item.potencia = !isNaN(val) && val >= 0 ? val : 0;
+                agendarRecalculo(item, spanConsumo);
+            });
 
-                if (temporizadoresSliders[item.uuid]) {
-                    clearTimeout(temporizadoresSliders[item.uuid]);
+            inputQtde.addEventListener("input", (e) => {
+                const val = parseInt(e.target.value, 10);
+                item.qtde = !isNaN(val) && val >= 1 ? val : 1;
+                agendarRecalculo(item, spanConsumo);
+            });
+
+            inputHoras.addEventListener("input", (e) => {
+                let val = parseFloat(e.target.value);
+                if (isNaN(val)) val = 0;
+                if (val > 24) {
+                    val = 24;
+                    e.target.value = 24;
                 }
-
-                spanConsumo.style.opacity = "0.5";
-
-                temporizadoresSliders[item.uuid] = setTimeout(() => {
-                    const novoConsumo = ((item.potencia / 1000) * item.horas * item.dias) * item.qtde;
-                    spanConsumo.textContent = `${novoConsumo.toFixed(2)} kWh/mês`;
-                    spanConsumo.style.opacity = "1";
-                    recalcularTotalGeral();
-                }, 3000);
+                item.horas = val;
+                agendarRecalculo(item, spanConsumo);
             });
 
             btnRemover.addEventListener("click", () => {
-                if (temporizadoresSliders[item.uuid]) clearTimeout(temporizadoresSliders[item.uuid]);
+                if (temporizadoresEdicao[item.uuid]) clearTimeout(temporizadoresEdicao[item.uuid]);
                 aparelhosNaResidencia = aparelhosNaResidencia.filter(obj => obj.uuid !== item.uuid);
                 atualizarPainelResidencia();
             });
@@ -273,7 +333,7 @@ document.addEventListener("DOMContentLoaded", () => {
             containerAdicionados.appendChild(card);
         });
 
-        spanTotalGeral.textContent = `${consumoTotalGeral.toFixed(2)} kWh`;
+        recalcularTotalGeral(consumoTotalGeral);
 
         if (aparelhosNaResidencia.length > 0) {
             btnVerResultados.removeAttribute("disabled");
@@ -282,10 +342,14 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     }
 
-    function recalcularTotalGeral() {
-        let total = aparelhosNaResidencia.reduce((acc, item) => {
-            return acc + (((item.potencia / 1000) * item.horas * item.dias) * item.qtde);
-        }, 0);
-        spanTotalGeral.textContent = `${total.toFixed(2)} kWh`;
+    function recalcularTotalGeral(totalPreCalculado = null) {
+        const totalKwh = totalPreCalculado !== null
+            ? totalPreCalculado
+            : aparelhosNaResidencia.reduce((acc, item) => acc + calcularConsumoItem(item), 0);
+
+        const tarifa = obterTarifaAtual();
+        const custoEstimado = totalKwh * tarifa;
+
+        spanTotalGeral.textContent = `${totalKwh.toFixed(2)} kWh (R$ ${custoEstimado.toFixed(2)})`;
     }
 });
