@@ -78,6 +78,42 @@
 
                     <div id="aparelhos-adicionados-container" class="aparelhos-adicionados-lista"></div>
 
+                    <div id="modal-calendario-utilizacao" class="modal-overlay" style="display: none;">
+                        <div class="modal-content modal-calendario-box">
+                            <h3>Calendário de Utilização</h3>
+                            <p class="modal-calendario-subtitulo">
+                                Selecione o mês e clique nos dias que utilizou o aparelho:
+                            </p>
+
+                            <div class="calendario-mes-grupo">
+                                <label for="select-mes-referencia">Mês de Referência:</label>
+                                <select id="select-mes-referencia">
+                                    <option value="30" selected>Mês padrão (30 dias)</option>
+                                    <option value="31">Mês de 31 dias</option>
+                                    <option value="28">Fevereiro (28 dias)</option>
+                                </select>
+                            </div>
+
+                            <div id="grid-dias-calendario" class="grid-dias-calendario"></div>
+
+                            <div class="calendario-resumo-linha">
+                                <span id="texto-total-dias-selecionados">Total: 0 dias selecionados</span>
+                                <button type="button" id="btn-selecionar-todos-dias" class="btn-link-verde">
+                                    Selecionar Todos
+                                </button>
+                            </div>
+
+                            <div class="calendario-acoes-rodape">
+                                <button type="button" id="btn-cancelar-calendario" class="btn-calendario-cancelar">
+                                    Cancelar
+                                </button>
+                                <button type="button" id="btn-confirmar-calendario" class="btn-calendario-confirmar">
+                                    Confirmar Dias
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
                     <div class="resumo-geral-card">
                         <div class="resumo-geral-info">
                             <span class="resumo-titulo">Consumo Estimado</span>
@@ -102,8 +138,8 @@
                                 <label><input type="checkbox" value="iluminacao"> Iluminacao Geral</label>
                                 <label><input type="checkbox" value="outros"> Outros & Diversos</label>
                             </div>
-                            <button type="button" id="btn-fechar-modal-filtro" class="btn-continuar-desktop">Aplicar e
-                                Fechar</button>
+                            <button type="button" id="btn-fechar-modal-filtro" class="btn-continuar-desktop">
+                                Aplicar e Fechar</button>
                         </div>
                     </div>
                 </div>

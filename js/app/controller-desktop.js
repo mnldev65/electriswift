@@ -252,7 +252,7 @@ document.addEventListener("DOMContentLoaded", () => {
                             <input type="number" class="input-potencia" min="1" step="1" value="${item.potencia}" ${bloqueadoAttr}>
                         </label>
                         <label>
-                            Qtd:
+                            Quantidade:
                             <input type="number" class="input-qtde" min="1" step="1" value="${item.qtde}" ${bloqueadoAttr}>
                         </label>
                     </div>
@@ -350,6 +350,6 @@ document.addEventListener("DOMContentLoaded", () => {
         const tarifa = obterTarifaAtual();
         const custoEstimado = totalKwh * tarifa;
 
-        spanTotalGeral.textContent = `${totalKwh.toFixed(2)} kWh (R$ ${custoEstimado.toFixed(2)})`;
+        spanTotalGeral.textContent = `${totalKwh.toFixed(2)} kWh`;
     }
 });
