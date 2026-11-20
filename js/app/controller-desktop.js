@@ -293,6 +293,7 @@ document.addEventListener("DOMContentLoaded", () => {
             const inputPotencia = card.querySelector(".input-potencia");
             const inputQtde = card.querySelector(".input-qtde");
             const inputHoras = card.querySelector(".input-horas");
+            const btnCalendario = card.querySelector(".btn-calendario-item");
             const btnRemover = card.querySelector(".btn-remover-item");
             const spanConsumo = card.querySelector(".card-consumo-individual");
 
@@ -324,6 +325,10 @@ document.addEventListener("DOMContentLoaded", () => {
                 agendarRecalculo(item, spanConsumo);
             });
 
+            btnCalendario.addEventListener("click", () => {
+                abrirCalendarioDesktop(item);
+            });
+
             btnRemover.addEventListener("click", () => {
                 if (temporizadoresEdicao[item.uuid]) clearTimeout(temporizadoresEdicao[item.uuid]);
                 aparelhosNaResidencia = aparelhosNaResidencia.filter(obj => obj.uuid !== item.uuid);
@@ -351,5 +356,119 @@ document.addEventListener("DOMContentLoaded", () => {
         const custoEstimado = totalKwh * tarifa;
 
         spanTotalGeral.textContent = `${totalKwh.toFixed(2)} kWh`;
+    }
+
+    const modalCalendarioDesktop = document.getElementById("modal-calendario-desktop");
+    const selectMesDesktop = document.getElementById("mes-referencia-desktop");
+    const gradeDiasDesktop = document.getElementById("grade-dias-desktop");
+    const contadorDiasDesktop = document.getElementById("contador-dias-desktop");
+    const btnTodosDiasDesktop = document.getElementById("btn-todos-dias-desktop");
+    const btnCancelarCalendarioDesktop = document.getElementById("btn-cancelar-calendario-desktop");
+    const btnConfirmarCalendarioDesktop = document.getElementById("btn-confirmar-calendario-desktop");
+
+    let uuidAparelhoAtivoCalendario = null;
+    let diasMarcadosTemporarios = [];
+
+    function atualizarTextoContadorDias() {
+        if (!contadorDiasDesktop) return;
+        contadorDiasDesktop.textContent = `Total: ${diasMarcadosTemporarios.length} dias selecionados`;
+    }
+
+    function desenharGradeDiasDesktop(quantidadeDiasMes) {
+        if (!gradeDiasDesktop) return;
+        gradeDiasDesktop.innerHTML = "";
+
+        for (let dia = 1; dia <= quantidadeDiasMes; dia++) {
+            const estaMarcado = diasMarcadosTemporarios.includes(dia);
+            const botaoDia = document.createElement("button");
+            botaoDia.type = "button";
+            botaoDia.className = estaMarcado ? "dia-btn-desktop selecionado" : "dia-btn-desktop";
+            botaoDia.textContent = String(dia);
+
+            botaoDia.addEventListener("click", () => {
+                const posicao = diasMarcadosTemporarios.indexOf(dia);
+                if (posicao > -1) {
+                    diasMarcadosTemporarios.splice(posicao, 1);
+                    botaoDia.classList.remove("selecionado");
+                } else {
+                    diasMarcadosTemporarios.push(dia);
+                    botaoDia.classList.add("selecionado");
+                }
+                atualizarTextoContadorDias();
+            });
+
+            gradeDiasDesktop.appendChild(botaoDia);
+        }
+
+        atualizarTextoContadorDias();
+    }
+
+    function abrirCalendarioDesktop(aparelho) {
+        if (!aparelho || !aparelho.editando || !modalCalendarioDesktop) return;
+
+        uuidAparelhoAtivoCalendario = aparelho.uuid;
+        const totalMes = aparelho.mesReferencia || 30;
+
+        if (selectMesDesktop) {
+            selectMesDesktop.value = String(totalMes);
+        }
+
+        if (Array.isArray(aparelho.diasSelecionadosLista) && aparelho.diasSelecionadosLista.length > 0) {
+            diasMarcadosTemporarios = aparelho.diasSelecionadosLista.filter(d => d <= totalMes);
+        } else {
+            diasMarcadosTemporarios = totalMes >= 1 ? [1] : [];
+        }
+
+        desenharGradeDiasDesktop(totalMes);
+        modalCalendarioDesktop.style.display = "flex";
+    }
+
+    function fecharCalendarioDesktop() {
+        if (modalCalendarioDesktop) {
+            modalCalendarioDesktop.style.display = "none";
+        }
+        uuidAparelhoAtivoCalendario = null;
+        diasMarcadosTemporarios = [];
+    }
+
+    if (selectMesDesktop) {
+        selectMesDesktop.addEventListener("change", (evento) => {
+            const novoTotalDias = Number(evento.target.value) || 30;
+            diasMarcadosTemporarios = diasMarcadosTemporarios.filter(dia => dia <= novoTotalDias);
+            desenharGradeDiasDesktop(novoTotalDias);
+        });
+    }
+
+    if (btnTodosDiasDesktop) {
+        btnTodosDiasDesktop.addEventListener("click", () => {
+            const totalDias = Number(selectMesDesktop ? selectMesDesktop.value : 30) || 30;
+            diasMarcadosTemporarios = Array.from({ length: totalDias }, (_, i) => i + 1);
+            desenharGradeDiasDesktop(totalDias);
+        });
+    }
+
+    if (btnCancelarCalendarioDesktop) {
+        btnCancelarCalendarioDesktop.addEventListener("click", fecharCalendarioDesktop);
+    }
+
+    if (modalCalendarioDesktop) {
+        modalCalendarioDesktop.addEventListener("click", (evento) => {
+            if (evento.target === modalCalendarioDesktop) {
+                fecharCalendarioDesktop();
+            }
+        });
+    }
+
+    if (btnConfirmarCalendarioDesktop) {
+        btnConfirmarCalendarioDesktop.addEventListener("click", () => {
+            const aparelhoAlvo = aparelhosNaResidencia.find(obj => obj.uuid === uuidAparelhoAtivoCalendario);
+            if (aparelhoAlvo) {
+                aparelhoAlvo.mesReferencia = Number(selectMesDesktop ? selectMesDesktop.value : 30) || 30;
+                aparelhoAlvo.diasSelecionadosLista = [...diasMarcadosTemporarios];
+                aparelhoAlvo.dias = diasMarcadosTemporarios.length;
+                atualizarPainelResidencia();
+            }
+            fecharCalendarioDesktop();
+        });
     }
 });

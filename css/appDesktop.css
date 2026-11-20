@@ -29,6 +29,7 @@ body {
   color: var(--text-primary);
   font-family: 'Inter', sans-serif;
   overflow-x: hidden;
+  overflow-y: hidden;
 }
 
 .app-header {
@@ -220,31 +221,31 @@ body {
   border-radius: 8px;
 }
 
-.modal-calendario-box {
+.calendario-desktop-box {
   width: 440px;
   text-align: center;
 }
 
-.modal-calendario-subtitulo {
+.calendario-desktop-subtitulo {
   font-size: 0.9rem;
   color: var(--text-secondary);
   margin-top: -10px;
 }
 
-.calendario-mes-grupo {
+.calendario-desktop-mes {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   gap: 8px;
 }
 
-.calendario-mes-grupo label {
+.calendario-desktop-mes label {
   font-size: 0.9rem;
   font-weight: 700;
   color: var(--text-primary);
 }
 
-.calendario-mes-grupo select {
+.calendario-desktop-mes select {
   width: 100%;
   padding: 10px 12px;
   border: 1px solid var(--border-color);
@@ -254,13 +255,13 @@ body {
   background-color: var(--input-bg);
 }
 
-.grid-dias-calendario {
+.grade-dias-desktop {
   display: grid;
   grid-template-columns: repeat(7, 1fr);
   gap: 8px;
 }
 
-.btn-dia-calendario {
+.dia-btn-desktop {
   padding: 8px 0;
   border: 1px solid #CBD5E1;
   border-radius: 6px;
@@ -269,20 +270,20 @@ body {
   font-size: 0.85rem;
   font-weight: 600;
   cursor: pointer;
-  transition: all 0.15s ease;
 }
 
-.btn-dia-calendario:hover {
+.dia-btn-desktop:hover {
   border-color: var(--accent-color);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
 }
 
-.btn-dia-calendario.ativo {
+.dia-btn-desktop.selecionado {
   background-color: var(--accent-color);
   border-color: var(--accent-color);
   color: var(--white);
 }
 
-.calendario-resumo-linha {
+.calendario-desktop-barra {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -290,7 +291,7 @@ body {
   color: var(--text-secondary);
 }
 
-.btn-link-verde {
+.btn-selecionar-todos-desktop {
   background: none;
   border: none;
   color: var(--accent-color-hover);
@@ -299,17 +300,17 @@ body {
   cursor: pointer;
 }
 
-.btn-link-verde:hover {
+.btn-selecionar-todos-desktop:hover {
   text-decoration: underline;
 }
 
-.calendario-acoes-rodape {
+.calendario-desktop-rodape {
   display: flex;
   justify-content: space-between;
   gap: 12px;
 }
 
-.btn-calendario-cancelar {
+.btn-cancelar-desktop {
   flex: 1;
   padding: 12px;
   border: none;
@@ -320,11 +321,11 @@ body {
   cursor: pointer;
 }
 
-.btn-calendario-cancelar:hover {
+.btn-cancelar-desktop:hover {
   background-color: #991B1B;
 }
 
-.btn-calendario-confirmar {
+.btn-confirmar-desktop {
   flex: 1;
   padding: 12px;
   border: none;
@@ -335,7 +336,7 @@ body {
   cursor: pointer;
 }
 
-.btn-calendario-confirmar:hover {
+.btn-confirmar-desktop:hover {
   background-color: var(--primary-color);
 }
 
