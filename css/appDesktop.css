@@ -25,7 +25,7 @@
 }
 
 body {
-  background-color: var(--dark-bg);
+  background-color: #F3F8F6;
   color: var(--text-primary);
   font-family: 'Inter', sans-serif;
   overflow-x: hidden;
@@ -130,7 +130,7 @@ body {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  gap: 20px;
+  gap: 30px;
 }
 
 .etapa01-titulo {
@@ -685,4 +685,147 @@ body {
 .btn-continuar-desktop:hover {
   background-color: var(--dark-bg);
   border: 2px solid var(--accent-color);
+}
+
+.Etapa02 {
+  min-height: calc(100vh - 80px);
+  width: 100%;
+  background-color: var(--dark-bg);
+  padding: 28px 36px;
+}
+
+.etapa02-grid {
+  display: grid;
+  grid-template-columns: 1.15fr 0.85fr;
+  gap: 24px;
+  align-items: start;
+}
+
+.etapa02-coluna-esquerda,
+.etapa02-coluna-direita {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.etapa02-kpis-linha {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+.kpi-card-desktop,
+.grafico-card-desktop,
+.cadastrados-card-desktop {
+  background-color: var(--card-bg);
+  border-radius: 12px;
+  padding: 20px 24px;
+  color: var(--text-primary);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.economia-card-desktop, 
+.dicas-card-desktop {
+  background-color: var(--card-bg);
+  border-radius: 12px;
+  padding: 20px 24px;
+  color: var(--text-primary);
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+}
+
+.kpi-label {
+  display: block;
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: var(--text-secondary);
+  margin-bottom: 8px;
+}
+
+.kpi-valor {
+  display: block;
+  font-size: 1.85rem;
+  font-weight: 800;
+  color: var(--text-primary);
+}
+
+.economia-topo {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 14px;
+}
+
+.badge-economia {
+  background-color: #DCFCE7;
+  color: var(--primary-color);
+  font-size: 0.8rem;
+  font-weight: 700;
+  padding: 4px 10px;
+  border-radius: 999px;
+}
+
+.economia-corpo {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  align-items: center;
+}
+
+.economia-destaque-box {
+  border: 1px solid var(--accent-color);
+  border-radius: 10px;
+  padding: 14px;
+  background-color: #F0FDF4;
+}
+
+.economia-valor-grande {
+  display: block;
+  font-size: 1.45rem;
+  font-weight: 800;
+  color: var(--primary-color);
+  margin: 6px 0;
+}
+
+.economia-top3-box ol {
+  padding-left: 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-size: 0.9rem;
+}
+
+.span-economia-top3-box {
+  color: var(--accent-color-hover);
+}
+
+.lista-aparelhos-resumo {
+  max-height: 280px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 12px;
+}
+
+.item-resumo-linha {
+  border: 1px solid var(--border-color);
+  border-radius: 10px;
+  padding: 12px 14px;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr auto;
+  gap: 10px;
+  align-items: center;
+}
+
+.dicas-card-desktop ul {
+  padding-left: 18px;
+  margin-top: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  font-size: 0.92rem;
 }

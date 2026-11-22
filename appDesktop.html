@@ -145,11 +145,75 @@
             </div>
         </section>
 
-        <section class="Etapa02"></section>
-        <section class="Etapa03"></section>
-        <section class="Etapa04"></section>
+        <section class="Etapa02">
+            <div class="etapa02-grid">
+                <div class="etapa02-coluna-esquerda">
+                    <div class="etapa02-kpis-linha">
+                        <div class="kpi-card-desktop">
+                            <span class="kpi-label">CONSUMO MENSAL TOTAL</span>
+                            <strong class="kpi-valor" id="res-desktop-total-kwh">0.00 kWh</strong>
+                        </div>
+
+                        <div class="kpi-card-desktop">
+                            <span class="kpi-label">CUSTO MENSAL ESTIMADO</span>
+                            <strong class="kpi-valor" id="res-desktop-total-custo">R$ 0,00</strong>
+                        </div>
+                    </div>
+
+                    <div class="economia-card-desktop">
+                        <div class="economia-topo">
+                            <h3>ECONOMIA POTENCIAL</h3>
+                            <span class="badge-economia" id="res-desktop-badge-economia">
+                                R$ 0,00 / mes
+                            </span>
+                        </div>
+                        <div class="economia-corpo">
+                            <div class="economia-destaque-box">
+                                <span class="economia-mini-titulo">ECONOMIA TOTAL POSSIVEL</span>
+                                <strong class="economia-valor-grande" id="res-desktop-economia-valor">
+                                    R$ 0,00 / mes
+                                </strong>
+
+                                <p id="res-desktop-economia-perc">Reducao de ate 0% em sua conta de luz.</p>
+                            </div>
+
+                            <div class="economia-top3-box">
+                                <h4>
+                                    Top <span class="span-economia-top3-box">3 oportunidades</span> para economizar:
+                                </h4>
+                                <ol id="res-desktop-top3-lista"></ol>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="grafico-card-desktop">
+                        <h3>COMPARACAO DE CENARIOS (kWh/mes)</h3>
+                        <div class="canvas-wrapper-desktop">
+                            <canvas id="grafico-cenarios-desktop"></canvas>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="etapa02-coluna-direita">
+                    <div class="cadastrados-card-desktop">
+                        <h3>APARELHOS CADASTRADOS</h3>
+                        <div id="res-desktop-lista-aparelhos" class="lista-aparelhos-resumo"></div>
+                    </div>
+
+                    <div class="dicas-card-desktop">
+                        <h3>DICAS PRATICAS DE ECONOMIA</h3>
+                        <ul id="res-desktop-lista-dicas">
+                            <li>Utilize a luz natural sempre que possivel.</li>
+                            <li>Reduza o tempo de banho no chuveiro eletrico.</li>
+                            <li>Desligue eletronicos da tomada (modo stand-by).</li>
+                            <li>Verifique se as borrachas da geladeira estao vedando bem.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
     </main>
 </body>
 <script src="./js/app/controller-desktop.js"></script>
-
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </html>

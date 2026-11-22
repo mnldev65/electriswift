@@ -471,4 +471,196 @@ document.addEventListener("DOMContentLoaded", () => {
             fecharCalendarioDesktop();
         });
     }
+
+    const secaoEtapa01 = document.querySelector(".container-etapa01");
+    const secaoEtapa02 = document.querySelector(".Etapa02");
+
+    const elTotalKwh = document.getElementById("res-desktop-total-kwh");
+    const elTotalCusto = document.getElementById("res-desktop-total-custo");
+    const elBadgeEconomia = document.getElementById("res-desktop-badge-economia");
+    const elEconomiaValor = document.getElementById("res-desktop-economia-valor");
+    const elEconomiaPerc = document.getElementById("res-desktop-economia-perc");
+    const elTop3Lista = document.getElementById("res-desktop-top3-lista");
+    const elListaAparelhosResumo = document.getElementById("res-desktop-lista-aparelhos");
+    const canvasGraficoDesktop = document.getElementById("grafico-cenarios-desktop");
+
+    let instanciaGraficoDesktop = null;
+
+    if (secaoEtapa02) {
+        secaoEtapa02.style.display = "none";
+    }
+
+    function formatarMoedaBR(valor) {
+        return `R$ ${Number(valor || 0).toFixed(2).replace(".", ",")}`;
+    }
+
+    function calcularDadosEtapa02() {
+        const tarifa = obterTarifaAtual();
+
+        const detalhados = aparelhosNaResidencia.map(item => {
+            const kwhAtual = calcularConsumoItem(item);
+            const custoAtual = kwhAtual * tarifa;
+            const horasOtimizadas = Math.max(Number(item.horas || 0) * 0.8, 0.1);
+            const kwhOtimizado = ((item.potencia / 1000) * horasOtimizadas * item.dias) * item.qtde;
+            const economiaKwh = Math.max(kwhAtual - kwhOtimizado, 0);
+            const economiaReais = economiaKwh * tarifa;
+
+            return {
+                ...item,
+                kwhAtual,
+                custoAtual,
+                kwhOtimizado,
+                economiaReais
+            };
+        });
+
+        const totalKwh = detalhados.reduce((acc, d) => acc + d.kwhAtual, 0);
+        const totalCusto = totalKwh * tarifa;
+        const totalKwhOtimizado = detalhados.reduce((acc, d) => acc + d.kwhOtimizado, 0);
+        const economiaTotalReais = Math.max(totalCusto - (totalKwhOtimizado * tarifa), 0);
+        const economiaPerc = totalCusto > 0 ? Math.round((economiaTotalReais / totalCusto) * 100) : 0;
+
+        const top3 = [...detalhados]
+            .sort((a, b) => b.economiaReais - a.economiaReais)
+            .slice(0, 3);
+
+        return {
+            detalhados,
+            totalKwh,
+            totalCusto,
+            totalKwhOtimizado,
+            economiaTotalReais,
+            economiaPerc,
+            top3
+        };
+    }
+
+    function renderizarGraficoDesktop(dados) {
+        if (!canvasGraficoDesktop || typeof Chart === "undefined") return;
+
+        if (instanciaGraficoDesktop) {
+            instanciaGraficoDesktop.destroy();
+        }
+
+        const ctx = canvasGraficoDesktop.getContext("2d");
+        instanciaGraficoDesktop = new Chart(ctx, {
+            type: "bar",
+            data: {
+                labels: ["Cenário Atual", "Cenário Otimizado"],
+                datasets: [{
+                    label: "Consumo mensal (kWh)",
+                    data: [
+                        Number(dados.totalKwh.toFixed(2)),
+                        Number(dados.totalKwhOtimizado.toFixed(2))
+                    ],
+                    backgroundColor: ["#10B981", "#0B3B24"],
+                    borderRadius: 6
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { display: false }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+    }
+
+    function renderizarEtapa02() {
+        const dados = calcularDadosEtapa02();
+
+        if (elTotalKwh) elTotalKwh.textContent = `${dados.totalKwh.toFixed(2)} kWh`;
+        if (elTotalCusto) elTotalCusto.textContent = formatarMoedaBR(dados.totalCusto);
+
+        const textoEconomiaMes = `${formatarMoedaBR(dados.economiaTotalReais)} / mes`;
+        if (elBadgeEconomia) elBadgeEconomia.textContent = textoEconomiaMes;
+        if (elEconomiaValor) elEconomiaValor.textContent = textoEconomiaMes;
+        if (elEconomiaPerc) {
+            elEconomiaPerc.textContent = `Reducao de ate ${dados.economiaPerc}% em sua conta de luz.`;
+        }
+
+        if (elTop3Lista) {
+            elTop3Lista.innerHTML = "";
+            dados.top3.forEach(item => {
+                const li = document.createElement("li");
+                li.textContent = `${item.nome} (${formatarMoedaBR(item.economiaReais)}/mes)`;
+                elTop3Lista.appendChild(li);
+            });
+        }
+
+        if (elListaAparelhosResumo) {
+            elListaAparelhosResumo.innerHTML = "";
+            dados.detalhados.forEach(item => {
+                const linha = document.createElement("div");
+                linha.classList.add("item-resumo-linha");
+                linha.innerHTML = `
+                <div>
+                    <strong>${item.nome}</strong>
+                    <div><small>${item.potencia}W • Qtd: ${item.qtde}</small></div>
+                </div>
+                <div><small>${item.horas}h/dia • ${item.dias} dias</small></div>
+                <div><strong>${item.kwhAtual.toFixed(2)} kWh</strong></div>
+                <div><strong>${formatarMoedaBR(item.custoAtual)}</strong></div>
+            `;
+                elListaAparelhosResumo.appendChild(linha);
+            });
+        }
+
+        renderizarGraficoDesktop(dados);
+    }
+
+    function abrirEtapa02() {
+        if (aparelhosNaResidencia.length === 0) {
+            alert("Adicione pelo menos um aparelho antes de ver os resultados.");
+            return;
+        }
+
+        renderizarEtapa02();
+
+        if (secaoEtapa01) {
+            secaoEtapa01.style.display = "none";
+        }
+
+        if (secaoEtapa02) {
+            secaoEtapa02.style.display = "block";
+        }
+
+        window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+
+    if (btnVerResultados) {
+        btnVerResultados.addEventListener("click", abrirEtapa02);
+    }
+
+    const btnReiniciarHeader = document.getElementById("drawer-restart-btn");
+
+    if (btnReiniciarHeader) {
+        btnReiniciarHeader.addEventListener("click", () => {
+            Object.values(temporizadoresEdicao).forEach(timerId => clearTimeout(timerId));
+            temporizadoresEdicao = {};
+            aparelhosNaResidencia = [];
+
+            if (instanciaGraficoDesktop) {
+                instanciaGraficoDesktop.destroy();
+                instanciaGraficoDesktop = null;
+            }
+
+            atualizarPainelResidencia();
+
+            if (secaoEtapa02) {
+                secaoEtapa02.style.display = "none";
+            }
+            if (secaoEtapa01) {
+                secaoEtapa01.style.display = "";
+            }
+
+            window.scrollTo({ top: 0, behavior: "smooth" });
+        });
+    }
 });
