@@ -26,8 +26,10 @@ O projeto encontra-se em **desenvolvimento ativo**, com a arquitetura de interfa
 ### 🖥️ Versão Desktop
 - [x] **Landing Page (`index.html`):** Apresentação do propósito e acesso à aplicação.
 - [x] **Sobre (`about.html`):** Explicação técnica do projeto e da lógica computacional.(será melhorado nas próximas fases)
-- [x] **Cadastrar Aparelho (`appDesktop.html` - Etapa 01):** Interface dedicada em *Split Screen* com formulário em card flutuante e campos estilizados.
-- [ ] **Etapas Subsequentes (02 a 05):** Estão sendo planejadas para as próximas fases.
+- [x] **Cadastrar Aparelho (`appDesktop.html` - Etapa 01):** Interface em *Split Screen* com busca inteligente por nome, filtro por categorias via modal com checkboxes e suporte a cadastro de aparelho personalizado.
+- [x] **Gerenciamento Dinâmico & Edição (`controller-desktop.js`):** Cards horizontais por aparelho com modo de edição controlado (`Editar`/`Terminar`), ajuste de potência (W), quantidade, horas de uso diário e modal de calendário interativo para seleção de dias no mês.
+- [x] **Cálculo em Tempo Real & Tarifa:** Estimativa individual e geral em kWh com configuração de tarifa (R$/kWh) e atraso (*debounce*) no recálculo durante edições.
+- [ ] **Visualização de Resultados & Etapas Subsequentes:** Ação do botão "Ver Resultados" e etapas seguintes em desenvolvimento/planejamento
 
 ### ⚙️ Geral & Infraestrutura
 - [x] Deploy e hospedagem automática configurados no **GitHub Pages**.
@@ -60,18 +62,17 @@ Na versão mobile, a navegação é guiada por etapas sequenciais e intuitivas:
 *Fluxo:* `Tela inicial → Seleção de Aparelhos → Configurar Utilização → Resultados → Comparação de Cenários → Resumo Final`
 
 ### 🖥️ Fluxo Desktop
-Na versão desktop, a experiência utiliza o conceito de *Split Screen* e aproveita o espaço horizontal para maior conforto visual:
+Na versão desktop, a experiência utiliza o conceito de *Split Screen* (com rolagem interna no painel direito para preservar a visualização do lado esquerdo) e organização em painel interativo:
 
 1. **Tela Inicial (Landing Page / `index.html`)** — Apresenta a proposta e direciona para a aplicação.
 2. **Sobre (`about.html`)** — Explica a lógica computacional e os passos de cálculo do projeto.
-3. **Cadastrar Aparelho (Etapa 01 / `appDesktop.html`)** — Formulário flutuante moderno para inserção de nome, categoria, potência, tempo de uso e dias no mês.
+3. **Gerenciamento de Aparelhos (Etapa 01 / `appDesktop.html`)** — Busca por nome, filtro por categorias em pop-up com checkboxes, criação de item personalizado, configuração da tarifa (R$/kWh), edição de potência/quantidade/horas/calendário de dias por card e resumo de consumo estimado.
 4. **Etapas futuras (ainda em planejamento)**
-   - Apresentação do consumo acumulado (kWh) e custo financeiro (R$)
-   - Comparativo visual em gráficos entre o cenário atual e o otimizado
-   - Reunião dos principais indicadores e dicas práticas
+  - Exibição detalhada ao acionar **Ver Resultados**
+  - Comparativo visual em gráficos entre o cenário atual e o otimizado
+  - Reunião dos principais indicadores e dicas práticas
 
-
-*Fluxo:* `Tela inicial → Cadastro de Aparelhos → Etapas seguintes ainda sendo planejadas`
+*Fluxo:* `Tela inicial → Gerenciamento de Aparelhos → Ver Resultados (e etapas seguintes em planejamento)`
 
 ---
 
