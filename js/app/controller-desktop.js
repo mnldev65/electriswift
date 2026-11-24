@@ -192,7 +192,7 @@ document.addEventListener("DOMContentLoaded", () => {
             uuid: Date.now(),
             editando: false
         };
-        aparelhosNaResidencia.push(novoItem);
+        aparelhosNaResidencia.unshift(novoItem);
         inputBusca.value = "";
         containerResultados.innerHTML = "";
         atualizarPainelResidencia();
