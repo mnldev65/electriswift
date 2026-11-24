@@ -536,36 +536,82 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     function renderizarGraficoDesktop(dados) {
-        if (!canvasGraficoDesktop || typeof Chart === "undefined") return;
+        if (!canvasGraficoDesktop) return;
+
+        if (typeof Chart === "undefined") {
+            console.warn("Chart.js nao foi carregado. Verifique a tag <script> no HTML.");
+            return;
+        }
 
         if (instanciaGraficoDesktop) {
             instanciaGraficoDesktop.destroy();
+            instanciaGraficoDesktop = null;
         }
+
+        const labelsAparelhos = dados.detalhados.map(item => item.nome);
+        const serieAtual = dados.detalhados.map(item => Number(item.kwhAtual.toFixed(2)));
+        const serieOtimizada = dados.detalhados.map(item => Number(item.kwhOtimizado.toFixed(2)));
 
         const ctx = canvasGraficoDesktop.getContext("2d");
         instanciaGraficoDesktop = new Chart(ctx, {
             type: "bar",
             data: {
-                labels: ["Cenário Atual", "Cenário Otimizado"],
-                datasets: [{
-                    label: "Consumo mensal (kWh)",
-                    data: [
-                        Number(dados.totalKwh.toFixed(2)),
-                        Number(dados.totalKwhOtimizado.toFixed(2))
-                    ],
-                    backgroundColor: ["#10B981", "#0B3B24"],
-                    borderRadius: 6
-                }]
+                labels: labelsAparelhos,
+                datasets: [
+                    {
+                        label: "Cenário Atual",
+                        data: serieAtual,
+                        backgroundColor: "#10B981",
+                        borderRadius: 6
+                    },
+                    {
+                        label: "Cenário Otimizado",
+                        data: serieOtimizada,
+                        backgroundColor: "#0B3B24",
+                        borderRadius: 6
+                    }
+                ]
             },
             options: {
                 responsive: true,
                 maintainAspectRatio: false,
                 plugins: {
-                    legend: { display: false }
+                    legend: {
+                        display: true,
+                        position: "top",
+                        labels: {
+                            color: "#1E293B",
+                            font: {
+                                weight: "600"
+                            }
+                        }
+                    },
+                    tooltip: {
+                        callbacks: {
+                            label: (context) => `${context.dataset.label}: ${context.parsed.y.toFixed(2)} kWh/mês`
+                        }
+                    }
                 },
                 scales: {
+                    x: {
+                        ticks: {
+                            color: "#1E293B",
+                            font: {
+                                weight: "600"
+                            },
+                            maxRotation: 25,
+                            minRotation: 0
+                        },
+                        grid: {
+                            display: false
+                        }
+                    },
                     y: {
-                        beginAtZero: true
+                        beginAtZero: true,
+                        ticks: {
+                            color: "#64748B",
+                            callback: (valor) => `${valor} kWh`
+                        }
                     }
                 }
             }
@@ -602,7 +648,8 @@ document.addEventListener("DOMContentLoaded", () => {
                 linha.innerHTML = `
                 <div>
                     <strong>${item.nome}</strong>
-                    <div><small>${item.potencia}W • Qtd: ${item.qtde}</small></div>
+                    <div><sm
+                    all>${item.potencia}W • Qtd: ${item.qtde}</sm></div>
                 </div>
                 <div><small>${item.horas}h/dia • ${item.dias} dias</small></div>
                 <div><strong>${item.kwhAtual.toFixed(2)} kWh</strong></div>
