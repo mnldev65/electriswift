@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Saiba como funciona o simulador de energia ElectriSwift na versão Desktop.">
+    <link rel="stylesheet" href="./css/aboutDesktop.css">
+    <title>ElectriSwift | Como Funciona (Desktop)</title>
+</head>
+
+<body>
+    <header class="app-header">
+        <div class="logo-wrapper">
+            <img src="./assets/Raio01.png" alt="" class="logo">
+            <h1 class="nome">
+                Electri<span class="destaque">Swift</span>
+            </h1>
+        </div>
+
+        <ul class="drawer-links">
+            <li class="drawer-link-item">
+                <a href="./index.html">Início</a>
+            </li>
+
+            <li class="drawer-link-item">
+                <a href="./about.html">Sobre</a>
+            </li>
+        </ul>
+
+        <button id="drawer-restart-btn" class="btn-action">Reiniciar
+        </button>
+    </header>
+
+    <main class="simulator-container">
+        <div class="step-header">
+            <h2 class="step-title">Como Funciona o ElectriSwift no Desktop?</h2>
+            <p class="step-subtitle">
+                Entenda o fluxo em tela ampla, as etapas do simulador Desktop e a lógica por trás dos cálculos de
+                energia da sua casa.
+            </p>
+        </div>
+
+        <section>
+            <h3 class="passoapasso">Fluxo da Versão Desktop</h3>
+
+            <div class="container-caixas-intrucoes">
+                <div class="accordion-card">
+                    <button type="button" class="accordion-header" aria-expanded="false">
+                        <span class="accordion-title">1. Cadastro e Busca de Aparelhos (Etapa 01)</span>
+                        <span class="accordion-icon">▼</span>
+                    </button>
+                    <div class="accordion-body">
+                        <p class="accordion-text">
+                            Na versão Desktop, a Etapa 01 organiza a experiência em formato Split Screen: de um lado a
+                            apresentação do cadastro e, do outro, o painel interativo de aparelhos. Você pode buscar
+                            itens do catálogo, filtrar por categorias no modal ou adicionar um aparelho personalizado
+                            informando nome e potência em Watts (W).
+                        </p>
+
+                        <img 
+                            src="./assets/filtrodesktop.png"
+                            class="imagem-about"
+                            alt="imagem do filtro do site"
+                        >
+
+                        <p class="accordion-text">
+                            Os novos aparelhos entram no topo da lista para facilitar a edição imediata, e o consumo
+                            total estimado é atualizado na tela conforme você adiciona, edita ou exclui itens.
+                        </p>
+
+                        <img 
+                            src="./assets/primeirateladesktop.png"
+                            class="imagem-about" 
+                            alt="imagem mostrando como funciona o cadastro dos itens"
+                        >
+                    </div>
+                </div>
+
+                <div class="accordion-card">
+                    <button type="button" class="accordion-header" aria-expanded="false">
+                        <span class="accordion-title">2. Configurar Utilização, Calendário e Tarifa</span>
+                        <span class="accordion-icon">▼</span>
+                    </button>
+                    <div class="accordion-body">
+                        <p class="accordion-text">
+                            Ao ativar o modo de edição de um aparelho, você ajusta a potência (W), a quantidade, as
+                            horas de uso por dia (inclusive com frações de hora) e abre o <strong>Calendário
+                                Interativo</strong> para escolher o mês de referência (28, 30 ou 31 dias) e marcar os
+                            dias exatos de utilização.
+                        </p>
+                        <p class="accordion-text">
+                            Você também configura a tarifa de energia em Reais por quilowatt-hora (R$/kWh) para estimar
+                            o custo financeiro da simulação.
+                        </p>
+                        <img 
+                            src="./assets/calendario.png"
+                            class="imagem-about" 
+                            alt="imagem do calendario interativo"
+                        >
+                    </div>
+                </div>
+
+                <div class="accordion-card">
+                    <button type="button" class="accordion-header" aria-expanded="false">
+                        <span class="accordion-title">3. Resultados Consolidados e Economia Potencial (Etapa 02)</span>
+                        <span class="accordion-icon">▼</span>
+                    </button>
+                    <div class="accordion-body">
+                        <p class="accordion-text">
+                            Ao clicar em <strong>Ver Resultados</strong> (com ao menos um aparelho cadastrado), a Etapa
+                            02 é exibida em uma visão consolidada para desktop, reunindo o consumo mensal total (kWh), o
+                            custo mensal estimado (R$), o destaque de economia potencial e o top 3 de oportunidades de
+                            economia.
+                        </p>
+                        <p class="accordion-text">
+                            Na coluna lateral, você acompanha a lista detalhada dos aparelhos cadastrados e dicas
+                            práticas para reduzir o consumo no dia a dia. Caso deseje recomeçar, o botão
+                            <strong>Reiniciar</strong> no topo limpa a simulação e retorna para a Etapa 01.
+                        </p>
+                        <img 
+                            src="./assets/etapa2.png"
+                            class="imagem-about" 
+                            alt="imagem do consumo mensal e dicas do site para economizar"
+                        >
+                    </div>
+                </div>
+
+                <div class="accordion-card">
+                    <button type="button" class="accordion-header" aria-expanded="false">
+                        <span class="accordion-title">4. Comparação de Cenários por Aparelho</span>
+                        <span class="accordion-icon">▼</span>
+                    </button>
+                    <div class="accordion-body">
+                        <p class="accordion-text">
+                            O gráfico interativo com Chart.js compara o <strong>Cenário Atual</strong> e o
+                            <strong>Cenário Otimizado</strong> de cada aparelho cadastrado em kWh/mês, facilitando
+                            identificar quais equipamentos pesam mais na conta e onde o ajuste de rotina gera maior
+                            retorno.
+                        </p>
+                        <img 
+                            src="./assets/image.png"
+                            class="imagem-about" 
+                            alt="imagem do gráfico e dicas do site para economizar"
+                        >
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <h3 class="section-heading">A Lógica dos Cálculos</h3>
+
+            <div class="container-caixas-intrucoes">
+                <div class="accordion-card">
+                    <button type="button" class="accordion-header" aria-expanded="false">
+                        <span class="accordion-title">Como a matemática do sistema funciona?</span>
+                        <span class="accordion-icon">▼</span>
+                    </button>
+                    <div class="accordion-body">
+                        <p class="accordion-text">
+                            O simulador traduz a potência elétrica, o tempo de uso e a quantidade de aparelhos em
+                            energia acumulada no mês:
+                        </p>
+                        <div class="math-box">
+                            <code
+                                class="math-formula">Consumo (kWh) = (Potência em W ÷ 1000) × Horas/dia × Dias × Quantidade</code>
+                        </div>
+
+                        <ul class="math-list">
+                            <li><strong>Potência (W):</strong> consumo nominal do aparelho.</li>
+                            <li><strong>Divisão por 1000:</strong> converte Watts (W) para Quilowatts (kW).</li>
+                            <li><strong>Dias:</strong> quantidade de dias selecionados no calendário (ou referência
+                                mensal).</li>
+                            <li><strong>Custo (R$):</strong> consumo em kWh multiplicado pela tarifa informada em
+                                R$/kWh.</li>
+                        </ul>
+
+                        <p class="accordion-text">
+                            O custo estimado da simulação segue a relação direta com a tarifa configurada:
+                        </p>
+                        <div class="math-box">
+                            <code
+                                class="math-formula">Custo Estimado (R$) = Consumo Mensal (kWh) × Tarifa (R$/kWh)</code>
+                        </div>
+
+                        <p class="accordion-text">
+                            Para projetar o cenário otimizado, o sistema simula uma redução percentual nas horas de uso
+                            de cada aparelho (respeitando um piso mínimo), permitindo comparar o consumo atual com uma
+                            rotina mais eficiente.
+                        </p>
+                        <div class="math-box"> 
+                            <code
+                                class="math-formula">Cenário Otimizado = Consumo Atual × (1 - Redução Percentual)</code>
+                        </div>
+
+                        <p class="accordion-text">
+                            <strong>Aviso:</strong> os valores calculados são estimativas aproximadas com base nos dados
+                            informados e não substituem a fatura da concessionária (impostos, bandeiras tarifárias e
+                            taxas adicionais podem variar).
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div class="sobre-cta-rodape">
+            <a href="./appDesktop.html" class="btn-primary-desktop">
+                Ir para o Simulador Desktop
+            </a>
+        </div>
+    </main>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const cards = document.querySelectorAll(".accordion-card");
+
+            cards.forEach((card) => {
+                const botao = card.querySelector(".accordion-header");
+                if (!botao) return;
+
+                botao.addEventListener("click", () => {
+                    const estaAberto = card.classList.contains("aberto");
+                    card.classList.toggle("aberto", !estaAberto);
+                    botao.setAttribute("aria-expanded", String(!estaAberto));
+                });
+            });
+        });
+    </script>
+</body>
+
+</html>

@@ -298,6 +298,10 @@ body {
     display: none;
 }
 
+#btndesktop {
+    display: none;
+}
+
 @media (min-width: 768px) {
     .brand {
         flex-direction: row;
@@ -413,7 +417,15 @@ body {
         display: none;
     }
 
+    #btnmobile {
+        display: none;
+    }
+
     #btnComecar-desktop {
+        display: inline-flex;
+    }
+
+    #btndesktop {
         display: inline-flex;
     }
 }
