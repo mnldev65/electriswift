@@ -77,6 +77,8 @@ const catalogoAparelhosPorCategoria = {
     }
 };
 
+const FATOR_REDUCAO = 0.258;
+
 let aparelhosNaResidencia = [];
 let temporizadoresEdicao = {};
 
@@ -209,7 +211,7 @@ document.addEventListener("DOMContentLoaded", () => {
             uuid: Date.now(),
             editando: true
         };
-        aparelhosNaResidencia.push(novoItem);
+        aparelhosNaResidencia.unshift(novoItem);
         inputBusca.value = "";
         containerResultados.innerHTML = "";
         atualizarPainelResidencia();
@@ -351,9 +353,6 @@ document.addEventListener("DOMContentLoaded", () => {
         const totalKwh = totalPreCalculado !== null
             ? totalPreCalculado
             : aparelhosNaResidencia.reduce((acc, item) => acc + calcularConsumoItem(item), 0);
-
-        const tarifa = obterTarifaAtual();
-        const custoEstimado = totalKwh * tarifa;
 
         spanTotalGeral.textContent = `${totalKwh.toFixed(2)} kWh`;
     }
@@ -500,16 +499,26 @@ document.addEventListener("DOMContentLoaded", () => {
         const detalhados = aparelhosNaResidencia.map(item => {
             const kwhAtual = calcularConsumoItem(item);
             const custoAtual = kwhAtual * tarifa;
-            const horasOtimizadas = Math.max(Number(item.horas || 0) * 0.8, 0.1);
+
+            const ehRefrigeracaoContinua =
+                [201, 202, 203].includes(item.id) ||
+                /geladeira|freezer/i.test(item.nome);
+
+            const horasOtimizadas = ehRefrigeracaoContinua
+                ? Number(item.horas || 0)
+                : Math.max(Number(item.horas || 0) * (1 - FATOR_REDUCAO), 0.1);
+
             const kwhOtimizado = ((item.potencia / 1000) * horasOtimizadas * item.dias) * item.qtde;
+            const custoOtimizado = kwhOtimizado * tarifa;
             const economiaKwh = Math.max(kwhAtual - kwhOtimizado, 0);
-            const economiaReais = economiaKwh * tarifa;
+            const economiaReais = Math.max(custoAtual - custoOtimizado, 0);
 
             return {
                 ...item,
                 kwhAtual,
                 custoAtual,
                 kwhOtimizado,
+                custoOtimizado,
                 economiaReais
             };
         });
@@ -517,7 +526,8 @@ document.addEventListener("DOMContentLoaded", () => {
         const totalKwh = detalhados.reduce((acc, d) => acc + d.kwhAtual, 0);
         const totalCusto = totalKwh * tarifa;
         const totalKwhOtimizado = detalhados.reduce((acc, d) => acc + d.kwhOtimizado, 0);
-        const economiaTotalReais = Math.max(totalCusto - (totalKwhOtimizado * tarifa), 0);
+        const totalCustoOtimizado = totalKwhOtimizado * tarifa;
+        const economiaTotalReais = Math.max(totalCusto - totalCustoOtimizado, 0);
         const economiaPerc = totalCusto > 0 ? Math.round((economiaTotalReais / totalCusto) * 100) : 0;
 
         const top3 = [...detalhados]
@@ -529,6 +539,7 @@ document.addEventListener("DOMContentLoaded", () => {
             totalKwh,
             totalCusto,
             totalKwhOtimizado,
+            totalCustoOtimizado,
             economiaTotalReais,
             economiaPerc,
             top3
@@ -588,7 +599,11 @@ document.addEventListener("DOMContentLoaded", () => {
                     },
                     tooltip: {
                         callbacks: {
-                            label: (context) => `${context.dataset.label}: ${context.parsed.y.toFixed(2)} kWh/mês`
+                            label: (context) => {
+                                const valorKwh = context.parsed.y;
+                                const valorReais = valorKwh * obterTarifaAtual();
+                                return `${context.dataset.label}: ${valorKwh.toFixed(2)} kWh (${formatarMoedaBR(valorReais)})`;
+                            }
                         }
                     }
                 },
@@ -648,12 +663,15 @@ document.addEventListener("DOMContentLoaded", () => {
                 linha.innerHTML = `
                 <div>
                     <strong>${item.nome}</strong>
-                    <div><sm
-                    all>${item.potencia}W • Qtd: ${item.qtde}</sm></div>
+                    <div><small>${item.potencia}W • Qtd: ${item.qtde}</small></div>
                 </div>
                 <div><small>${item.horas}h/dia • ${item.dias} dias</small></div>
                 <div><strong>${item.kwhAtual.toFixed(2)} kWh</strong></div>
-                <div><strong>${formatarMoedaBR(item.custoAtual)}</strong></div>
+                <div class="comparacao-preco-coluna">
+                    <span style="color: #ef4444; font-weight: 700;">${formatarMoedaBR(item.custoAtual)}</span>
+                    <span style="color: var(--text-secondary); margin: 0 4px;">→</span>
+                    <span style="color: #10B981; font-weight: 700;">${formatarMoedaBR(item.custoOtimizado)}</span>
+                </div>
             `;
                 elListaAparelhosResumo.appendChild(linha);
             });
@@ -668,8 +686,6 @@ document.addEventListener("DOMContentLoaded", () => {
             return;
         }
 
-        renderizarEtapa02();
-
         if (secaoEtapa01) {
             secaoEtapa01.style.display = "none";
         }
@@ -677,6 +693,8 @@ document.addEventListener("DOMContentLoaded", () => {
         if (secaoEtapa02) {
             secaoEtapa02.style.display = "block";
         }
+
+        renderizarEtapa02();
 
         window.scrollTo({ top: 0, behavior: "smooth" });
     }
